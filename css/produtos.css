@@ -1,0 +1,48 @@
+.prod{
+  margin: 5px;
+  display: inline-block;
+  border: 1px solid gray;
+  width: 180px;
+  list-style-type: none;
+  padding:0;
+  background-color: black;
+  border-radius: 5px;
+}
+.nome{
+  text-align: center;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 18px;
+  color: white;
+}
+.imagem{
+  min-height: 180px;
+  min-width: 180px;
+  vertical-align: middle;
+  background-color: white;  
+  display: inline-block;
+}
+.imagem img{
+  vertical-align: middle;
+  max-width: 100%;
+ }
+.preco{
+  text-align: center;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 40px;
+  color: white;
+  height: 40px;
+}
+.comprar{
+  width: 100%;
+  padding-left: 0;
+  background-color: #0fc0fc;
+  color: white;
+  font-family: 'SEGOE UI', sans-serif;
+  font-size: 15px;
+  border-style: none; 
+  height: 30px;
+}
+.comprar:hover{
+  background-color: #07A4DA;
+}

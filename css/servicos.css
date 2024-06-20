@@ -1,0 +1,79 @@
+.servicos {
+    color: #fff;
+    font-style: normal;
+    font-family: 'Segoe UI', sans-serif;
+    width: 100%;
+    font-size: 18px;
+    border-radius: 2px;
+    text-align: center;
+    border-style: none;
+    min-width: 630px
+}
+
+.servicos th {
+    background-color: #E56717;
+}
+
+.servicos th:first-child {
+    border-top-left-radius: 3px
+}
+
+.servicos th:last-child {
+    border-top-right-radius: 3px;
+    width: 100px
+}
+
+.servicos thead tr {
+    pointer-events: none
+}
+
+.servicos tbody tr {
+    cursor: default
+}
+
+.servicos tr {
+    background-color: #525252;
+    height: 25px;
+    color: #2f2f2f
+}
+
+.servicos .prioridade {
+    background-color: #940905
+}
+
+.servicos .sem_visualizar {
+    background-color: #3b3b3b
+}
+
+.servicos .visualizada {
+    background-color: #525252
+}
+
+.servicos tr th {
+    color: #fff;
+    border: none
+}
+
+.servicos tr td {
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #3d3d3d
+}
+
+a.acao {
+    display: none
+}
+
+.servicos tr:hover {
+    background-color: #1f1f1f;
+    -webkit-transition: background .2s ease-out;
+    -moz-transition: background .2s ease-out;
+    -o-transition: background .2s ease-out;
+    -ms-transition: background .2s ease-out;
+    transition: background .2s ease-out
+}
+
+.servicos tr:hover a.acao {
+    display: inline;
+    color: #fff
+}

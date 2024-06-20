@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+	<title>ASIMOV</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div class="div-esquerda">
+	<h1 class="nome">ASIMOV</h1>			
+	<div class="menu">
+	<ul>
+		<a target="ctd" href="paginas/inicio.html"><li onclick="mC(this);" id="inicio" class="ativo" >Página Inicial</li></a>
+		<a target="ctd" href="paginas/produtos.html"><li onclick="mC(this);"  id="produtos">Produtos</li></a>
+		<a target="ctd" href="paginas/servicos.html"><li onclick="mC(this);" id="servicos">Serviços</li></a>
+		<a target="ctd" href="paginas/faleconosco.html"><li onclick="mC(this);" id="faleconosco">Fale Conosco</li></a>
+	</ul>
+	</div>
+	</div>
+	<div class="div-direita">
+		<iframe	name="ctd" src="paginas/inicio.html"></iframe>
+	</div>
+	</div>	
+</body>
+</html>
+<script src="js/jquery.min.js"></script>
+<script>
+	function mC(elemento){
+		$(".ativo").removeClass("ativo");
+		$(elemento).toggleClass("ativo");
+	}
+</script>

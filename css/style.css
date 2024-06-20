@@ -1,0 +1,109 @@
+.div-esquerda{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	background-color: black;
+	width: 18em;
+	left: 0;
+
+}
+.div-direita{
+	position: fixed;
+	left: 0;
+	right: 0;
+	margin-left: 18em;
+	height: 100%;
+}
+.menu ul{
+	list-style-type: none;
+	padding-left: 0;
+}
+.nome{
+	color: white;
+	font-weight: 100;
+	text-align: center;
+	font-family: 'SEGOE UI',sans-serif;
+}
+.titulo{
+	color: #292929;
+	font-weight: 100;
+	text-align: center;
+	font-family: 'SEGOE UI',sans-serif;
+}
+.menu{
+	padding-top: 0.1em;
+	padding-bottom: 0.2em;
+	background-color: #C7C7C7;
+	height: auto;
+}
+.menu li{
+	font-family: 'SEGOE UI',sans-serif;
+	color: black;
+	text-align: center;
+	width: 16.5em;
+	height: 2em;
+	line-height: 2em;
+	background-color: white;
+	margin-bottom: 0.5em;
+	border-right: 0.5em solid #C7C7C7;
+	border-top-right-radius: 25px;
+	border-bottom-right-radius: 25px;
+}
+.menu a{
+	text-decoration: none;
+}
+.menu li:hover{
+	background-color: #3B3B3B;
+	color: white;
+	width: 17.5em;
+}
+body{
+	background-color: #C7C7C7;
+}
+
+#inicio:hover{
+	border-right: 4px solid red;
+}
+
+#produtos:hover{
+	border-right: 4px solid green;
+}
+
+#servicos:hover{
+	border-right: 4px solid blue;
+}
+
+#contatos:hover{
+	border-right: 4px solid orange;
+}
+.ativo{
+	background-color: black !important;
+	color: white !important;
+	border-right: 4px solid gold !important;
+	width: 17.5em !important;
+}
+iframe{
+	height:100%;
+	width:100%;
+	border: none;
+}
+.conteudo{
+	font-family: 'SEGOE UI', sans-serif;
+	font-size: 1.2em;
+	border-radius: 15px;
+	background-color: #DEDEDE;
+	left: 0;
+	right: 0;
+	padding: 15px;
+	height: auto;
+}
+.img_produto{
+	width: 140px;
+	height: 140px;
+}
+.tipo{
+	color: #292929;
+	font-size: 25px;
+	text-align: left;
+	font-family: 'SEGOE UI',sans-serif;
+}
