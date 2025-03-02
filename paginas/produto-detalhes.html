@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>Detalhes do Produto</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Ant Design CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.10/antd.min.css" />
+	
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	
+	<!-- CSS personalizado -->
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	
+	<style>
+		.ant-card {
+			border-radius: 8px;
+			overflow: hidden;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+			margin-bottom: 24px;
+		}
+		
+		.ant-card-head {
+			border-bottom: none;
+			padding: 16px 24px 0;
+		}
+		
+		.ant-card-head-title {
+			font-weight: 600;
+			font-size: 18px;
+		}
+		
+		.ant-card-body {
+			padding: 16px 24px 24px;
+		}
+		
+		.ant-btn {
+			border-radius: 4px;
+			font-weight: 500;
+			height: auto;
+			padding: 8px 16px;
+			box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05);
+		}
+		
+		.ant-btn-primary {
+			background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+			border-color: var(--primary-color);
+		}
+		
+		.ant-btn-primary:hover {
+			background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+			border-color: var(--primary-dark);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+		
+		.ant-page-header {
+			padding: 16px 0;
+			background-color: transparent;
+		}
+		
+		.ant-page-header-heading-title {
+			font-weight: 600;
+			font-size: 24px;
+			color: var(--primary-color);
+		}
+		
+		.ant-page-header-heading-sub-title {
+			font-size: 14px;
+			color: var(--neutral-600);
+		}
+		
+		.ant-divider {
+			margin: 24px 0;
+		}
+		
+		.ant-row {
+			margin: 0 -12px;
+		}
+		
+		.ant-col {
+			padding: 0 12px;
+		}
+		
+		.ant-rate {
+			font-size: 14px;
+			color: #fadb14;
+			margin-bottom: 12px;
+		}
+		
+		.ant-rate-star:not(:last-child) {
+			margin-right: 4px;
+		}
+		
+		.produto-preco {
+			font-size: 2rem;
+			font-weight: 600;
+			color: var(--primary-color);
+			margin: 12px 0;
+		}
+		
+		.produto-preco-original {
+			font-size: 1.2rem;
+			text-decoration: line-through;
+			color: var(--neutral-500);
+			margin-bottom: 4px;
+		}
+		
+		.produto-categoria {
+			display: inline-block;
+			background-color: var(--neutral-100);
+			color: var(--neutral-700);
+			padding: 4px 8px;
+			border-radius: 4px;
+			font-size: 0.75rem;
+			margin-bottom: 12px;
+		}
+		
+		.produto-desconto {
+			display: inline-block;
+			background-color: var(--primary-color);
+			color: white;
+			padding: 4px 8px;
+			border-radius: 4px;
+			font-size: 0.9rem;
+			font-weight: 600;
+			margin-left: 8px;
+		}
+		
+		.produto-fonte {
+			font-size: 0.9rem;
+			color: var(--neutral-500);
+			margin-top: 8px;
+		}
+		
+		.produto-imagem-container {
+			position: relative;
+			height: 400px;
+			overflow: hidden;
+			border-radius: 8px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+		}
+		
+		.produto-imagem {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			background-color: white;
+		}
+		
+		.produto-especificacoes {
+			margin-top: 24px;
+		}
+		
+		.produto-especificacao-item {
+			display: flex;
+			padding: 12px 0;
+			border-bottom: 1px solid var(--neutral-200);
+		}
+		
+		.produto-especificacao-item:last-child {
+			border-bottom: none;
+		}
+		
+		.produto-especificacao-chave {
+			width: 40%;
+			font-weight: 600;
+			color: var(--neutral-700);
+		}
+		
+		.produto-especificacao-valor {
+			width: 60%;
+			color: var(--neutral-600);
+		}
+		
+		.loading-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 400px;
+		}
+		
+		.ant-spin {
+			color: var(--primary-color);
+		}
+		
+		.produto-nao-encontrado {
+			text-align: center;
+			padding: 48px 0;
+			background-color: white;
+			border-radius: 8px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+		}
+		
+		.produto-nao-encontrado-icon {
+			font-size: 3rem;
+			color: var(--neutral-400);
+			margin-bottom: 16px;
+		}
+		
+		.ant-tabs-nav {
+			margin-bottom: 24px;
+		}
+		
+		.ant-tabs-tab {
+			padding: 12px 16px;
+		}
+		
+		.ant-tabs-tab-btn {
+			font-weight: 500;
+		}
+		
+		.ant-tabs-ink-bar {
+			background-color: var(--primary-color);
+		}
+		
+		.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+			color: var(--primary-color);
+		}
+		
+		.produtos-relacionados-titulo {
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: var(--primary-color);
+			margin-bottom: 24px;
+		}
+		
+		.produto-relacionado-card {
+			height: 100%;
+		}
+		
+		.produto-relacionado-imagem {
+			height: 150px;
+			overflow: hidden;
+		}
+		
+		.produto-relacionado-imagem img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+		
+		.produto-relacionado-nome {
+			font-weight: 600;
+			margin: 8px 0;
+			height: 40px;
+			overflow: hidden;
+		}
+		
+		.produto-relacionado-preco {
+			font-weight: 600;
+			color: var(--primary-color);
+		}
+	</style>
+</head>
+<body>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<!-- React e ReactDOM (necessários para Ant Design) -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+	
+	<!-- Ant Design JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.10/antd.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
+	
+	<div class="ant-layout-content">
+		<div class="conteudo fade-in">
+			<div id="produto-container">
+				<div class="loading-container">
+					<div class="ant-spin">
+						<i class="fas fa-spinner fa-spin fa-3x"></i>
+						<div class="ant-spin-text">Carregando detalhes do produto...</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		// Variáveis globais
+		let produtos = [];
+		let produtoAtual = null;
+		
+		// Função para obter parâmetros da URL
+		function obterParametroURL(nome) {
+			const urlParams = new URLSearchParams(window.location.search);
+			return urlParams.get(nome);
+		}
+		
+		// Função para carregar produtos do db.json
+		async function carregarProdutos() {
+			try {
+				const response = await fetch('../db.json');
+				const data = await response.json();
+				
+				if (data && data.produtos) {
+					produtos = data.produtos;
+					
+					// Obter ID do produto da URL
+					const produtoId = obterParametroURL('id');
+					
+					if (produtoId) {
+						// Encontrar produto pelo ID
+						produtoAtual = produtos.find(p => p.id === produtoId);
+						
+						if (produtoAtual) {
+							exibirDetalhes();
+						} else {
+							exibirProdutoNaoEncontrado();
+						}
+					} else {
+						exibirProdutoNaoEncontrado('ID do produto não especificado.');
+					}
+				} else {
+					exibirProdutoNaoEncontrado('Nenhum produto encontrado no banco de dados.');
+				}
+			} catch (error) {
+				console.error('Erro ao carregar produtos:', error);
+				exibirProdutoNaoEncontrado('Erro ao carregar produtos. Por favor, tente novamente mais tarde.');
+			}
+		}
+		
+		// Função para exibir detalhes do produto
+		function exibirDetalhes() {
+			const container = document.getElementById('produto-container');
+			
+			// Calcular desconto
+			let desconto = 0;
+			if (produtoAtual.preco_original > produtoAtual.preco) {
+				desconto = Math.round(((produtoAtual.preco_original - produtoAtual.preco) / produtoAtual.preco_original) * 100);
+			}
+			
+			// Gerar estrelas de avaliação
+			const avaliacao = produtoAtual.avaliacao || 0;
+			const estrelasHTML = gerarEstrelasHTML(avaliacao);
+			
+			// Gerar especificações
+			let especificacoesHTML = '';
+			if (produtoAtual.especificacoes) {
+				for (const [chave, valor] of Object.entries(produtoAtual.especificacoes)) {
+					especificacoesHTML += `
+						<div class="produto-especificacao-item">
+							<div class="produto-especificacao-chave">${chave}</div>
+							<div class="produto-especificacao-valor">${valor}</div>
+						</div>
+					`;
+				}
+			}
+			
+			// Produtos relacionados (mesma categoria)
+			const produtosRelacionados = produtos
+				.filter(p => p.categoria === produtoAtual.categoria && p.id !== produtoAtual.id)
+				.slice(0, 4);
+			
+			let produtosRelacionadosHTML = '';
+			if (produtosRelacionados.length > 0) {
+				produtosRelacionadosHTML = `
+					<div class="ant-divider"></div>
+					<h3 class="produtos-relacionados-titulo">Produtos Relacionados</h3>
+					<div class="ant-row">
+				`;
+				
+				produtosRelacionados.forEach(produto => {
+					produtosRelacionadosHTML += `
+						<div class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6" style="margin-bottom: 16px;">
+							<div class="ant-card produto-relacionado-card">
+								<div class="produto-relacionado-imagem">
+									<img src="../${produto.imagem}" alt="${produto.nome}" onerror="this.src='../imagens/produto-sem-imagem.jpg';">
+								</div>
+								<div class="ant-card-body" style="padding: 12px;">
+									<div class="produto-relacionado-nome">${produto.nome}</div>
+									<div class="produto-relacionado-preco">R$ ${produto.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+									<a href="produto-detalhes.html?id=${produto.id}" class="ant-btn ant-btn-link" style="padding-left: 0; color: var(--primary-color);">
+										Ver detalhes
+									</a>
+								</div>
+							</div>
+						</div>
+					`;
+				});
+				
+				produtosRelacionadosHTML += '</div>';
+			}
+			
+			// Atualizar título da página
+			document.title = produtoAtual.nome + ' - ASIMOV TECH';
+			
+			// Montar HTML
+			container.innerHTML = `
+				<div class="ant-page-header">
+					<div class="ant-page-header-back">
+						<a href="produtos.html" class="ant-page-header-back-button">
+							<i class="fas fa-arrow-left"></i> Voltar para Produtos
+						</a>
+					</div>
+					<div class="ant-page-header-heading">
+						<div class="ant-page-header-heading-left">
+							<span class="ant-page-header-heading-title">${produtoAtual.nome}</span>
+							<span class="ant-page-header-heading-sub-title">Código: ${produtoAtual.id}</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="ant-row" style="margin-top: 24px;">
+					<div class="ant-col ant-col-xs-24 ant-col-md-12">
+						<div class="produto-imagem-container">
+							<img src="../${produtoAtual.imagem}" alt="${produtoAtual.nome}" class="produto-imagem" onerror="this.src='../imagens/produto-sem-imagem.jpg';">
+						</div>
+					</div>
+					
+					<div class="ant-col ant-col-xs-24 ant-col-md-12">
+						<div class="ant-card">
+							<div class="ant-card-body">
+								<div class="produto-categoria">${produtoAtual.categoria || 'Sem categoria'}</div>
+								
+								<h1 class="ant-typography" style="margin-bottom: 8px;">${produtoAtual.nome}</h1>
+								
+								<div class="ant-rate">
+									${estrelasHTML}
+									<span style="margin-left: 8px; color: var(--neutral-600);">${avaliacao.toFixed(1)}</span>
+								</div>
+								
+								<div class="ant-typography" style="margin: 16px 0;">
+									${produtoAtual.descricao}
+								</div>
+								
+								<div class="produto-fonte">Fonte: ${produtoAtual.fonte}</div>
+								
+								<div class="ant-divider"></div>
+								
+								${produtoAtual.preco_original > produtoAtual.preco ? 
+									`<div class="produto-preco-original">R$ ${produtoAtual.preco_original.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>` : ''}
+								
+								<div style="display: flex; align-items: center;">
+									<div class="produto-preco">R$ ${produtoAtual.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+									${desconto > 0 ? `<div class="produto-desconto">-${desconto}%</div>` : ''}
+								</div>
+								
+								<div style="margin-top: 8px; color: var(--neutral-600);">
+									Em até 10x de R$ ${(produtoAtual.preco / 10).toLocaleString('pt-BR', { minimumFractionDigits: 2 })} sem juros
+								</div>
+								
+								<div class="ant-divider"></div>
+								
+								<div style="display: flex; gap: 16px; margin-top: 24px;">
+									<button class="ant-btn ant-btn-primary" style="flex: 1; height: 48px;">
+										<i class="fas fa-shopping-cart" style="margin-right: 8px;"></i> Comprar Agora
+									</button>
+									
+									<button class="ant-btn" style="width: 48px; height: 48px; padding: 0; display: flex; align-items: center; justify-content: center;">
+										<i class="fas fa-heart"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="ant-divider"></div>
+				
+				<div class="ant-tabs ant-tabs-top">
+					<div class="ant-tabs-nav">
+						<div class="ant-tabs-nav-list">
+							<div class="ant-tabs-tab ant-tabs-tab-active">
+								<div class="ant-tabs-tab-btn">Especificações</div>
+							</div>
+							<div class="ant-tabs-tab">
+								<div class="ant-tabs-tab-btn">Avaliações</div>
+							</div>
+							<div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="left: 0px; width: 100px;"></div>
+						</div>
+					</div>
+					<div class="ant-tabs-content">
+						<div class="ant-tabs-tabpane ant-tabs-tabpane-active">
+							<div class="ant-card">
+								<div class="ant-card-body">
+									<div class="produto-especificacoes">
+										${especificacoesHTML || '<p>Nenhuma especificação disponível para este produto.</p>'}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				${produtosRelacionadosHTML}
+			`;
+		}
+		
+		// Função para gerar HTML das estrelas de avaliação
+		function gerarEstrelasHTML(avaliacao) {
+			let html = '';
+			const estrelaCheia = '<i class="fas fa-star"></i>';
+			const estrelaMeia = '<i class="fas fa-star-half-alt"></i>';
+			const estrelaVazia = '<i class="far fa-star"></i>';
+			
+			const estrelasInteiras = Math.floor(avaliacao);
+			const temMeiaEstrela = avaliacao % 1 >= 0.5;
+			
+			for (let i = 1; i <= 5; i++) {
+				if (i <= estrelasInteiras) {
+					html += estrelaCheia;
+				} else if (i === estrelasInteiras + 1 && temMeiaEstrela) {
+					html += estrelaMeia;
+				} else {
+					html += estrelaVazia;
+				}
+			}
+			
+			return html;
+		}
+		
+		// Função para exibir mensagem quando o produto não é encontrado
+		function exibirProdutoNaoEncontrado(mensagem = 'Produto não encontrado.') {
+			const container = document.getElementById('produto-container');
+			container.innerHTML = `
+				<div class="produto-nao-encontrado">
+					<i class="fas fa-exclamation-circle produto-nao-encontrado-icon"></i>
+					<h3 class="ant-typography">${mensagem}</h3>
+					<a href="produtos.html" class="ant-btn ant-btn-primary" style="margin-top: 16px;">
+						Voltar para Produtos
+					</a>
+				</div>
+			`;
+		}
+		
+		// Inicializar a página
+		document.addEventListener('DOMContentLoaded', function() {
+			carregarProdutos();
+		});
+	</script>
+</body>
+</html> 

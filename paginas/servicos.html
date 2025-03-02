@@ -1,37 +1,741 @@
 <!DOCTYPE html>
+<html lang="pt-BR">
 <head>
 	<title>Serviços</title>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Ant Design CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.10/antd.min.css" />
+	
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	
+	<!-- CSS personalizado -->
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
-	<link rel="stylesheet" type="text/css" href="../css/servicos.css">
+	
+	<style>
+		.ant-card {
+			border-radius: 8px;
+			overflow: hidden;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+			height: 100%;
+			transition: all 0.3s ease;
+			margin-bottom: 24px;
+			position: relative;
+		}
+		
+		.ant-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+		}
+		
+		.ant-card-head {
+			border-bottom: none;
+			padding: 16px 24px 0;
+		}
+		
+		.ant-card-head-title {
+			font-weight: 600;
+			font-size: 18px;
+		}
+		
+		.ant-card-body {
+			padding: 16px 24px 24px;
+		}
+		
+		.ant-btn {
+			border-radius: 4px;
+			font-weight: 500;
+			height: auto;
+			padding: 8px 16px;
+			box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05);
+		}
+		
+		.ant-btn-primary {
+			background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+			border-color: var(--primary-color);
+		}
+		
+		.ant-btn-primary:hover {
+			background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+			border-color: var(--primary-dark);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+		
+		.ant-page-header {
+			padding: 16px 0;
+			background-color: transparent;
+		}
+		
+		.ant-page-header-heading-title {
+			font-weight: 600;
+			font-size: 24px;
+			color: var(--primary-color);
+		}
+		
+		.ant-page-header-heading-sub-title {
+			font-size: 14px;
+			color: var(--neutral-600);
+		}
+		
+		.ant-divider {
+			margin: 24px 0;
+		}
+		
+		.ant-row {
+			margin: 0 -12px;
+		}
+		
+		.ant-col {
+			padding: 0 12px;
+		}
+		
+		.ant-table {
+			background: white;
+			border-radius: 8px;
+			overflow: hidden;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+		}
+		
+		.ant-table-thead > tr > th {
+			background-color: var(--neutral-100);
+			color: var(--neutral-800);
+			font-weight: 600;
+			padding: 16px 24px;
+		}
+		
+		.ant-table-tbody > tr > td {
+			padding: 16px 24px;
+			border-bottom: 1px solid var(--neutral-200);
+		}
+		
+		.ant-table-tbody > tr:hover > td {
+			background-color: var(--neutral-50);
+		}
+		
+		.servico-icon {
+			font-size: 3rem;
+			margin-bottom: 1.5rem;
+			color: var(--primary-color);
+			display: block;
+			transition: all 0.3s ease;
+		}
+		
+		.ant-card:hover .servico-icon {
+			transform: scale(1.1);
+		}
+		
+		.servico-preco {
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: var(--primary-color);
+			margin: 16px 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+		}
+		
+		.servico-preco-periodo {
+			font-size: 0.9rem;
+			color: var(--neutral-600);
+		}
+		
+		.servico-tag {
+			position: absolute;
+			top: 16px;
+			right: 16px;
+			background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+			color: white;
+			padding: 4px 12px;
+			border-radius: 16px;
+			font-size: 0.8rem;
+			font-weight: 500;
+		}
+		
+		.servico-beneficios {
+			text-align: left;
+			margin: 16px 0;
+			padding: 0;
+			list-style: none;
+		}
+		
+		.servico-beneficios li {
+			margin-bottom: 8px;
+			padding-left: 24px;
+			position: relative;
+		}
+		
+		.servico-beneficios li:before {
+			content: "✓";
+			position: absolute;
+			left: 0;
+			color: var(--primary-color);
+			font-weight: bold;
+		}
+		
+		.servico-contato {
+			background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+			color: white;
+			padding: 48px 24px;
+			border-radius: 8px;
+			text-align: center;
+			margin-top: 48px;
+		}
+		
+		.servico-contato h2 {
+			color: white;
+			margin-bottom: 16px;
+		}
+		
+		.servico-contato p {
+			color: rgba(255, 255, 255, 0.9);
+			margin-bottom: 24px;
+		}
+		
+		.servico-faq {
+			margin-top: 48px;
+		}
+		
+		.ant-collapse {
+			background: white;
+			border-radius: 8px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+		}
+		
+		.ant-collapse-header {
+			font-weight: 500;
+		}
+		
+		.ant-collapse-content-box {
+			color: var(--neutral-600);
+		}
+		
+		.ant-tabs-nav {
+			margin-bottom: 24px;
+		}
+		
+		.ant-tabs-tab {
+			padding: 12px 16px;
+		}
+		
+		.ant-tabs-tab-btn {
+			font-weight: 500;
+		}
+		
+		.ant-tabs-ink-bar {
+			background-color: var(--primary-color);
+		}
+		
+		.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+			color: var(--primary-color);
+		}
+	</style>
 </head>
 <body>
-<h1 class="titulo">Serviços</h1>
-<hr>
-<div class="conteudo">
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	
-<table class="servicos">
-<thead>
-	<tr>
-		<th>Serviço</th>
-		<th>Preço</th>
-		<th style="width: auto;">Tempo Mínimo</th>
-	</tr>
-</thead>
-
-<tbody>
-
-	<tr> <td> Formatação de Computador c/ Backup </td> <td>R$ 45,00 </td> <td> 4h</td>  </tr>
-	<tr> <td> Formatação de Computador s/ Backup</td> <td>R$ 40,00</td> <td> 3h </td></tr>
-	<tr> <td> Formatação de Notebook c/ Backup</td> <td>R$ 55,00</td> <td> 4:30h</td> </tr>
-	<tr> <td> Formatação de Notebook s/ Backup</td> <td>R$ 50,00 </td> <td> 3:30h </td></tr>
-	<tr> <td> Limpeza de Computador</td> <td> R$ 30,00</td> <td> 2h </td> </tr>
-	<tr> <td> Limpeza de Notebook</td> <td>R$ 75,00  </td> <td> 4h</td></tr>
-
+	<!-- React e ReactDOM (necessários para Ant Design) -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 	
-</tbody>
-</table>
+	<!-- Ant Design JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.10/antd.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
+	
+	<div class="ant-layout-content">
+		<div class="conteudo fade-in">
+			<div class="ant-page-header">
+				<div class="ant-page-header-heading">
+					<div class="ant-page-header-heading-left">
+						<span class="ant-page-header-heading-title">Nossos Serviços</span>
+						<span class="ant-page-header-heading-sub-title">Soluções tecnológicas personalizadas para impulsionar seu negócio</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="ant-typography" style="margin-bottom: 24px;">
+				A ASIMOV TECH é sua parceira em transformação digital. Nossa equipe de especialistas oferece soluções inovadoras e personalizadas para empresas de todos os portes, combinando tecnologia de ponta com atendimento excepcional.
+			</div>
+			
+			<div class="ant-divider"></div>
+			
+			<div class="ant-tabs ant-tabs-top">
+				<div class="ant-tabs-nav">
+					<div class="ant-tabs-nav-list">
+						<div class="ant-tabs-tab ant-tabs-tab-active">
+							<div class="ant-tabs-tab-btn">Serviços de TI</div>
+						</div>
+						<div class="ant-tabs-tab">
+							<div class="ant-tabs-tab-btn">Desenvolvimento</div>
+						</div>
+						<div class="ant-tabs-tab">
+							<div class="ant-tabs-tab-btn">Consultoria</div>
+						</div>
+						<div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"></div>
+					</div>
+				</div>
+				<div class="ant-tabs-content">
+					<div class="ant-tabs-tabpane ant-tabs-tabpane-active" id="servicos-ti">
+						<div class="ant-row">
+							<div class="ant-col ant-col-xs-24 ant-col-md-8">
+								<div class="ant-card">
+									<div class="servico-tag">Mais Popular</div>
+									<div class="ant-card-body" style="text-align: center;">
+										<i class="fas fa-server servico-icon"></i>
+										<h3 class="ant-typography" style="margin-bottom: 12px;">Suporte de TI</h3>
+										<p class="ant-typography">Suporte técnico especializado 24/7 para manter sua infraestrutura funcionando sem interrupções.</p>
+										
+										<ul class="servico-beneficios">
+											<li>Monitoramento 24/7</li>
+											<li>Suporte remoto e presencial</li>
+											<li>Manutenção preventiva</li>
+											<li>Gestão de backups</li>
+										</ul>
+										
+										<div class="servico-preco">
+											R$ 1.200,00
+											<span class="servico-preco-periodo">/mês</span>
+										</div>
+										
+										<button class="ant-btn ant-btn-primary" style="width: 100%;">
+											<i class="fas fa-headset" style="margin-right: 8px;"></i>
+											Solicitar Orçamento
+										</button>
+									</div>
+								</div>
+							</div>
+							
+							<div class="ant-col ant-col-xs-24 ant-col-md-8">
+								<div class="ant-card">
+									<div class="ant-card-body" style="text-align: center;">
+										<i class="fas fa-shield-alt servico-icon"></i>
+										<h3 class="ant-typography" style="margin-bottom: 12px;">Segurança de Dados</h3>
+										<p class="ant-typography">Proteção avançada contra ameaças cibernéticas e soluções completas de backup.</p>
+										
+										<ul class="servico-beneficios">
+											<li>Firewall gerenciado</li>
+											<li>Antivírus corporativo</li>
+											<li>Backup em nuvem</li>
+											<li>Treinamento de segurança</li>
+										</ul>
+										
+										<div class="servico-preco">
+											R$ 1.800,00
+											<span class="servico-preco-periodo">/mês</span>
+										</div>
+										
+										<button class="ant-btn ant-btn-primary" style="width: 100%;">
+											<i class="fas fa-lock" style="margin-right: 8px;"></i>
+											Solicitar Orçamento
+										</button>
+									</div>
+								</div>
+							</div>
+							
+							<div class="ant-col ant-col-xs-24 ant-col-md-8">
+								<div class="ant-card">
+									<div class="ant-card-body" style="text-align: center;">
+										<i class="fas fa-network-wired servico-icon"></i>
+										<h3 class="ant-typography" style="margin-bottom: 12px;">Infraestrutura de Rede</h3>
+										<p class="ant-typography">Implementação e manutenção de redes corporativas de alta performance.</p>
+										
+										<ul class="servico-beneficios">
+											<li>Projeto personalizado</li>
+											<li>Cabeamento estruturado</li>
+											<li>Redes sem fio</li>
+											<li>Monitoramento de rede</li>
+										</ul>
+										
+										<div class="servico-preco">
+											R$ 2.500,00
+											<span class="servico-preco-periodo">/projeto</span>
+										</div>
+										
+										<button class="ant-btn ant-btn-primary" style="width: 100%;">
+											<i class="fas fa-project-diagram" style="margin-right: 8px;"></i>
+											Solicitar Orçamento
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="servico-contato">
+							<h2 class="ant-typography">Precisa de um serviço personalizado?</h2>
+							<p>Nossa equipe está pronta para desenvolver uma solução sob medida para seu negócio.</p>
+							<button class="ant-btn ant-btn-default" style="background: white; color: var(--primary-color);">
+								<i class="fas fa-phone" style="margin-right: 8px;"></i>
+								Fale com um Especialista
+							</button>
+						</div>
+						
+						<div class="servico-faq">
+							<h2 class="ant-typography" style="margin-bottom: 24px;">Perguntas Frequentes</h2>
+							
+							<div class="ant-collapse">
+								<div class="ant-collapse-item">
+									<div class="ant-collapse-header">
+										<i class="fas fa-question-circle" style="margin-right: 8px;"></i>
+										Como funciona o suporte 24/7?
+									</div>
+									<div class="ant-collapse-content">
+										<div class="ant-collapse-content-box">
+											Nossa equipe de suporte está disponível 24 horas por dia, 7 dias por semana, através de diversos canais: telefone, e-mail e chat. Garantimos tempo de resposta máximo de 30 minutos para problemas críticos.
+										</div>
+									</div>
+								</div>
+								
+								<div class="ant-collapse-item">
+									<div class="ant-collapse-header">
+										<i class="fas fa-question-circle" style="margin-right: 8px;"></i>
+										Qual o prazo médio de implementação?
+									</div>
+									<div class="ant-collapse-content">
+										<div class="ant-collapse-content-box">
+											O prazo varia de acordo com a complexidade do projeto. Tipicamente, projetos de infraestrutura levam de 2 a 4 semanas, enquanto implementações de segurança podem ser concluídas em 1 a 2 semanas.
+										</div>
+									</div>
+								</div>
+								
+								<div class="ant-collapse-item">
+									<div class="ant-collapse-header">
+										<i class="fas fa-question-circle" style="margin-right: 8px;"></i>
+										Os serviços incluem treinamento?
+									</div>
+									<div class="ant-collapse-content">
+										<div class="ant-collapse-content-box">
+											Sim! Todos os nossos serviços incluem treinamento básico para sua equipe. Também oferecemos programas de capacitação avançada sob demanda.
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-</div>
+					<div class="ant-tabs-tabpane" id="desenvolvimento" style="display: none;">
+						<div class="ant-row">
+							<div class="ant-col ant-col-xs-24 ant-col-md-8">
+								<div class="ant-card">
+									<div class="servico-tag">Mais Vendido</div>
+									<div class="ant-card-body" style="text-align: center;">
+										<i class="fas fa-laptop-code servico-icon"></i>
+										<h3 class="ant-typography" style="margin-bottom: 12px;">Desenvolvimento Web</h3>
+										<p class="ant-typography">Criação de sites e aplicações web modernas e responsivas.</p>
+										
+										<ul class="servico-beneficios">
+											<li>Design responsivo</li>
+											<li>Otimização SEO</li>
+											<li>Painel administrativo</li>
+											<li>Integração com APIs</li>
+										</ul>
+										
+										<div class="servico-preco">
+											R$ 3.500,00
+											<span class="servico-preco-periodo">/projeto</span>
+										</div>
+										
+										<button class="ant-btn ant-btn-primary" style="width: 100%;">
+											<i class="fas fa-code" style="margin-right: 8px;"></i>
+											Solicitar Orçamento
+										</button>
+									</div>
+								</div>
+							</div>
+							
+							<div class="ant-col ant-col-xs-24 ant-col-md-8">
+								<div class="ant-card">
+									<div class="ant-card-body" style="text-align: center;">
+										<i class="fas fa-mobile-alt servico-icon"></i>
+										<h3 class="ant-typography" style="margin-bottom: 12px;">Apps Mobile</h3>
+										<p class="ant-typography">Desenvolvimento de aplicativos nativos para iOS e Android.</p>
+										
+										<ul class="servico-beneficios">
+											<li>UI/UX personalizado</li>
+											<li>Integração com APIs</li>
+											<li>Push notifications</li>
+											<li>Analytics integrado</li>
+										</ul>
+										
+										<div class="servico-preco">
+											R$ 8.000,00
+											<span class="servico-preco-periodo">/projeto</span>
+										</div>
+										
+										<button class="ant-btn ant-btn-primary" style="width: 100%;">
+											<i class="fas fa-mobile-screen" style="margin-right: 8px;"></i>
+											Solicitar Orçamento
+										</button>
+									</div>
+								</div>
+							</div>
+							
+							<div class="ant-col ant-col-xs-24 ant-col-md-8">
+								<div class="ant-card">
+									<div class="ant-card-body" style="text-align: center;">
+										<i class="fas fa-database servico-icon"></i>
+										<h3 class="ant-typography" style="margin-bottom: 12px;">Sistemas Empresariais</h3>
+										<p class="ant-typography">Desenvolvimento de sistemas sob medida para sua empresa.</p>
+										
+										<ul class="servico-beneficios">
+											<li>Análise de requisitos</li>
+											<li>Desenvolvimento ágil</li>
+											<li>Testes automatizados</li>
+											<li>Suporte contínuo</li>
+										</ul>
+										
+										<div class="servico-preco">
+											R$ 12.000,00
+											<span class="servico-preco-periodo">/projeto</span>
+										</div>
+										
+										<button class="ant-btn ant-btn-primary" style="width: 100%;">
+											<i class="fas fa-cogs" style="margin-right: 8px;"></i>
+											Solicitar Orçamento
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="ant-tabs-tabpane" id="consultoria" style="display: none;">
+						<div class="ant-row">
+							<div class="ant-col ant-col-xs-24 ant-col-md-8">
+								<div class="ant-card">
+									<div class="servico-tag">Recomendado</div>
+									<div class="ant-card-body" style="text-align: center;">
+										<i class="fas fa-chart-line servico-icon"></i>
+										<h3 class="ant-typography" style="margin-bottom: 12px;">Consultoria Estratégica</h3>
+										<p class="ant-typography">Análise e planejamento estratégico de TI para seu negócio.</p>
+										
+										<ul class="servico-beneficios">
+											<li>Análise de processos</li>
+											<li>Planejamento estratégico</li>
+											<li>Gestão de projetos</li>
+											<li>Relatórios detalhados</li>
+										</ul>
+										
+										<div class="servico-preco">
+											R$ 200,00
+											<span class="servico-preco-periodo">/hora</span>
+										</div>
+										
+										<button class="ant-btn ant-btn-primary" style="width: 100%;">
+											<i class="fas fa-handshake" style="margin-right: 8px;"></i>
+											Solicitar Orçamento
+										</button>
+									</div>
+								</div>
+							</div>
+							
+							<div class="ant-col ant-col-xs-24 ant-col-md-8">
+								<div class="ant-card">
+									<div class="ant-card-body" style="text-align: center;">
+										<i class="fas fa-cloud servico-icon"></i>
+										<h3 class="ant-typography" style="margin-bottom: 12px;">Consultoria Cloud</h3>
+										<p class="ant-typography">Migração e otimização de infraestrutura em nuvem.</p>
+										
+										<ul class="servico-beneficios">
+											<li>Análise de custos</li>
+											<li>Planejamento de migração</li>
+											<li>Otimização de recursos</li>
+											<li>Monitoramento contínuo</li>
+										</ul>
+										
+										<div class="servico-preco">
+											R$ 5.000,00
+											<span class="servico-preco-periodo">/projeto</span>
+										</div>
+										
+										<button class="ant-btn ant-btn-primary" style="width: 100%;">
+											<i class="fas fa-cloud-upload-alt" style="margin-right: 8px;"></i>
+											Solicitar Orçamento
+										</button>
+									</div>
+								</div>
+							</div>
+							
+							<div class="ant-col ant-col-xs-24 ant-col-md-8">
+								<div class="ant-card">
+									<div class="ant-card-body" style="text-align: center;">
+										<i class="fas fa-shield-virus servico-icon"></i>
+										<h3 class="ant-typography" style="margin-bottom: 12px;">Consultoria em Segurança</h3>
+										<p class="ant-typography">Análise e implementação de políticas de segurança.</p>
+										
+										<ul class="servico-beneficios">
+											<li>Auditoria de segurança</li>
+											<li>Análise de vulnerabilidades</li>
+											<li>Políticas de segurança</li>
+											<li>Treinamento da equipe</li>
+										</ul>
+										
+										<div class="servico-preco">
+											R$ 6.000,00
+											<span class="servico-preco-periodo">/projeto</span>
+										</div>
+										
+										<button class="ant-btn ant-btn-primary" style="width: 100%;">
+											<i class="fas fa-user-shield" style="margin-right: 8px;"></i>
+											Solicitar Orçamento
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="ant-divider"></div>
+			
+			<h2 class="ant-typography" style="margin-bottom: 24px; color: var(--primary-color);">Tabela de Serviços</h2>
+			
+			<div class="ant-table-wrapper" style="margin-bottom: 32px;">
+				<table class="ant-table">
+					<thead class="ant-table-thead">
+						<tr>
+							<th>Serviço</th>
+							<th>Descrição</th>
+							<th>Preço</th>
+							<th>Prazo</th>
+						</tr>
+					</thead>
+					<tbody class="ant-table-tbody">
+						<tr>
+							<td>Desenvolvimento de Website</td>
+							<td>Criação de sites responsivos e otimizados para SEO</td>
+							<td>A partir de R$ 3.500,00</td>
+							<td>15-30 dias</td>
+						</tr>
+						<tr>
+							<td>Desenvolvimento de Aplicativo</td>
+							<td>Criação de aplicativos para iOS e Android</td>
+							<td>A partir de R$ 8.000,00</td>
+							<td>30-60 dias</td>
+						</tr>
+						<tr>
+							<td>Consultoria em TI</td>
+							<td>Análise e recomendações para otimização de processos</td>
+							<td>R$ 200,00/hora</td>
+							<td>Sob demanda</td>
+						</tr>
+						<tr>
+							<td>Migração para Nuvem</td>
+							<td>Transferência segura de dados e aplicações para a nuvem</td>
+							<td>A partir de R$ 5.000,00</td>
+							<td>7-21 dias</td>
+						</tr>
+						<tr>
+							<td>Manutenção de Sistemas</td>
+							<td>Suporte contínuo e atualizações para sistemas existentes</td>
+							<td>A partir de R$ 1.500,00/mês</td>
+							<td>Contínuo</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="ant-divider"></div>
+			
+			<div class="ant-row">
+				<div class="ant-col ant-col-xs-24 ant-col-md-12">
+					<h3 class="ant-typography" style="margin-bottom: 16px; color: var(--primary-color);">Por que escolher nossos serviços?</h3>
+					
+					<ul class="ant-list ant-list-split">
+						<li class="ant-list-item">
+							<div class="ant-list-item-meta">
+								<div class="ant-list-item-meta-avatar">
+									<i class="fas fa-check-circle" style="color: var(--primary-color); font-size: 18px;"></i>
+								</div>
+								<div class="ant-list-item-meta-content">
+									<h4 class="ant-list-item-meta-title">Equipe Especializada</h4>
+									<div class="ant-list-item-meta-description">Profissionais certificados com ampla experiência no mercado</div>
+								</div>
+							</div>
+						</li>
+						<li class="ant-list-item">
+							<div class="ant-list-item-meta">
+								<div class="ant-list-item-meta-avatar">
+									<i class="fas fa-check-circle" style="color: var(--primary-color); font-size: 18px;"></i>
+								</div>
+								<div class="ant-list-item-meta-content">
+									<h4 class="ant-list-item-meta-title">Soluções Personalizadas</h4>
+									<div class="ant-list-item-meta-description">Projetos desenvolvidos de acordo com as necessidades específicas do seu negócio</div>
+								</div>
+							</div>
+						</li>
+						<li class="ant-list-item">
+							<div class="ant-list-item-meta">
+								<div class="ant-list-item-meta-avatar">
+									<i class="fas fa-check-circle" style="color: var(--primary-color); font-size: 18px;"></i>
+								</div>
+								<div class="ant-list-item-meta-content">
+									<h4 class="ant-list-item-meta-title">Suporte Contínuo</h4>
+									<div class="ant-list-item-meta-description">Atendimento 24/7 para garantir o funcionamento ininterrupto dos seus sistemas</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="ant-col ant-col-xs-24 ant-col-md-12">
+					<div class="ant-card" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white;">
+						<div class="ant-card-body">
+							<h3 class="ant-typography" style="color: white; margin-bottom: 16px;">Solicite uma Avaliação Gratuita</h3>
+							<p class="ant-typography">Entre em contato conosco para uma avaliação inicial sem compromisso. Nossa equipe irá analisar as necessidades do seu negócio e propor as melhores soluções.</p>
+							<a href="faleconosco.html" class="ant-btn" style="background: white; color: var(--primary-color); border-color: white; margin-top: 16px;">
+								Solicitar Avaliação
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		// Inicializar componentes do Ant Design
+		document.addEventListener('DOMContentLoaded', function() {
+			// Tabs
+			const tabs = document.querySelectorAll('.ant-tabs-tab');
+			const tabPanes = document.querySelectorAll('.ant-tabs-tabpane');
+			
+			// Mostrar a primeira aba por padrão
+			tabPanes[0].style.display = 'block';
+			
+			tabs.forEach((tab, index) => {
+				tab.addEventListener('click', function() {
+					// Atualizar tabs
+					tabs.forEach(t => t.classList.remove('ant-tabs-tab-active'));
+					this.classList.add('ant-tabs-tab-active');
+					
+					// Atualizar ink bar
+					const inkBar = document.querySelector('.ant-tabs-ink-bar');
+					inkBar.style.left = `${index * 120}px`;
+					
+					// Mostrar conteúdo da aba selecionada
+					tabPanes.forEach(pane => pane.style.display = 'none');
+					tabPanes[index].style.display = 'block';
+				});
+			});
+			
+			// Collapse
+			const collapseItems = document.querySelectorAll('.ant-collapse-item');
+			collapseItems.forEach(item => {
+				const header = item.querySelector('.ant-collapse-header');
+				const content = item.querySelector('.ant-collapse-content');
+				
+				header.addEventListener('click', function() {
+					item.classList.toggle('ant-collapse-item-active');
+					content.classList.toggle('ant-collapse-content-active');
+				});
+			});
+		});
+	</script>
 </body>
 </html>

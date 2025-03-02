@@ -1,109 +1,514 @@
-.div-esquerda{
+/* Reset e estilos base */
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+	/* Sistema de cores refinado */
+	--primary-color: #7E22CE;      /* Roxo mais escuro para melhor contraste */
+	--primary-dark: #581C87;
+	--primary-light: #C084FC;
+	--secondary-color: #4338CA;    /* Índigo mais escuro */
+	--accent-color: #EC4899;       /* Rosa mais vibrante */
+	
+	/* Cores neutras */
+	--neutral-900: #111827;
+	--neutral-800: #1F2937;
+	--neutral-700: #374151;
+	--neutral-600: #4B5563;
+	--neutral-500: #6B7280;
+	--neutral-400: #9CA3AF;
+	--neutral-300: #D1D5DB;
+	--neutral-200: #E5E7EB;
+	--neutral-100: #F3F4F6;
+	--neutral-50: #F9FAFB;
+	
+	/* Sistema de espaçamento (baseado em 4px) */
+	--space-1: 0.25rem;   /* 4px */
+	--space-2: 0.5rem;    /* 8px */
+	--space-3: 0.75rem;   /* 12px */
+	--space-4: 1rem;      /* 16px */
+	--space-6: 1.5rem;    /* 24px */
+	--space-8: 2rem;      /* 32px */
+	--space-12: 3rem;     /* 48px */
+	--space-16: 4rem;     /* 64px */
+	
+	/* Sistema de tipografia */
+	--font-size-xs: 0.75rem;
+	--font-size-sm: 0.875rem;
+	--font-size-base: 1rem;
+	--font-size-lg: 1.125rem;
+	--font-size-xl: 1.25rem;
+	--font-size-2xl: 1.5rem;
+	--font-size-3xl: 1.875rem;
+	--font-size-4xl: 2.25rem;
+}
+
+/* Estilos base */
+body {
+	font-family: 'Segoe UI', sans-serif;
+	background-color: var(--neutral-50);
+	color: var(--neutral-800);
+	line-height: 1.6;
+	margin: 0;
+	padding: 0;
+}
+
+/* Estilos para Ant Design */
+/* Sobrescrever estilos do Ant Design para manter nossa identidade visual */
+.ant-layout-sider {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color)) !important;
+    z-index: 1000;
+}
+
+.ant-menu.ant-menu-dark, 
+.ant-menu-dark .ant-menu-sub, 
+.ant-menu.ant-menu-dark .ant-menu-sub {
+    background: transparent !important;
+}
+
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: white !important;
+    color: var(--primary-color) !important;
+}
+
+.ant-menu-item {
+    position: relative;
+    margin: 8px 0 !important;
+    border-radius: 10px !important;
+    overflow: visible !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.ant-menu-item a {
+    color: inherit !important;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 16px;
+}
+
+.ant-menu-item-selected a {
+    color: var(--primary-color) !important;
+}
+
+/* Melhorias visuais para o menu */
+.ant-menu-item::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.ant-menu-item-selected::after {
+    opacity: 1;
+}
+
+.ant-menu-item .anticon {
+    margin-right: 12px;
+    font-size: 18px;
+}
+
+/* Efeito de hover aprimorado */
+.ant-menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    transform: translateX(5px);
+}
+
+.ant-menu-item-selected {
+    background-color: white !important;
+    transform: translateX(5px);
+}
+
+/* Tooltip personalizado */
+[data-tooltip] {
+    position: relative;
+    cursor: help;
+}
+
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--neutral-800);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: var(--font-size-xs);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    bottom: 135%;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Melhorias para o logo e container */
+.logo-container {
+    position: relative;
+    overflow: hidden;
+    padding: 1.5rem 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
+}
+
+.logo-container img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 3px solid rgba(255, 255, 255, 0.7);
+    transition: transform 0.3s ease;
+    background-color: white;
+    padding: 5px;
+}
+
+.logo-container img:hover {
+    transform: scale(1.05);
+}
+
+.site-name {
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 0.8rem;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1.5rem;
+}
+
+.site-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+    letter-spacing: 0.5px;
+}
+
+/* Melhorias para o footer */
+.footer {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 2rem 0.5rem 1rem;
+    text-align: center;
+    color: white;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-icons a {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.social-icons a:hover {
+    background-color: white;
+    color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Layout principal */
+.div-esquerda {
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	background-color: black;
+	background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
 	width: 18em;
 	left: 0;
-
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+	z-index: 100;
+	transition: all 0.3s ease;
 }
-.div-direita{
+
+.div-direita {
 	position: fixed;
 	left: 0;
 	right: 0;
 	margin-left: 18em;
 	height: 100%;
+	background-color: var(--neutral-50);
+	overflow: hidden;
 }
-.menu ul{
+
+/* Estilo do menu */
+.menu {
+	padding-top: 0.1em;
+	padding-bottom: 0.2em;
+	background-color: rgba(255, 255, 255, 0.1);
+	height: auto;
+	margin-top: 2rem;
+}
+
+.menu ul {
 	list-style-type: none;
 	padding-left: 0;
 }
-.nome{
-	color: white;
-	font-weight: 100;
-	text-align: center;
-	font-family: 'SEGOE UI',sans-serif;
-}
-.titulo{
-	color: #292929;
-	font-weight: 100;
-	text-align: center;
-	font-family: 'SEGOE UI',sans-serif;
-}
-.menu{
-	padding-top: 0.1em;
-	padding-bottom: 0.2em;
-	background-color: #C7C7C7;
-	height: auto;
-}
-.menu li{
-	font-family: 'SEGOE UI',sans-serif;
-	color: black;
+
+.menu li {
+	font-family: 'Segoe UI', sans-serif;
+	color: var(--neutral-800);
 	text-align: center;
 	width: 16.5em;
-	height: 2em;
-	line-height: 2em;
+	height: 2.5em;
+	line-height: 2.5em;
 	background-color: white;
-	margin-bottom: 0.5em;
-	border-right: 0.5em solid #C7C7C7;
+	margin-bottom: 0.8em;
+	border-right: 0.5em solid rgba(255, 255, 255, 0.2);
 	border-top-right-radius: 25px;
 	border-bottom-right-radius: 25px;
+	transition: all 0.3s ease;
+	font-weight: 500;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-.menu a{
+
+.menu a {
 	text-decoration: none;
 }
-.menu li:hover{
-	background-color: #3B3B3B;
-	color: white;
-	width: 17.5em;
-}
-body{
-	background-color: #C7C7C7;
+
+.menu li:hover {
+	background-color: var(--neutral-100);
+	transform: translateX(5px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#inicio:hover{
-	border-right: 4px solid red;
+/* Estilos para itens de menu ativos e hover */
+#inicio:hover {
+	border-right: 0.5em solid var(--primary-light);
 }
 
-#produtos:hover{
-	border-right: 4px solid green;
+#produtos:hover {
+	border-right: 0.5em solid var(--secondary-color);
 }
 
-#servicos:hover{
-	border-right: 4px solid blue;
+#servicos:hover {
+	border-right: 0.5em solid var(--accent-color);
 }
 
-#contatos:hover{
-	border-right: 4px solid orange;
+#faleconosco:hover {
+	border-right: 0.5em solid var(--primary-color);
 }
-.ativo{
-	background-color: black !important;
-	color: white !important;
-	border-right: 4px solid gold !important;
-	width: 17.5em !important;
+
+.ativo {
+	background-color: var(--neutral-100) !important;
+	border-right: 0.5em solid var(--primary-color) !important;
+	font-weight: 600 !important;
+	transform: translateX(5px);
 }
-iframe{
-	height:100%;
-	width:100%;
+
+/* Estilo do iframe */
+iframe {
+	width: 100%;
+	height: 100%;
 	border: none;
+	background-color: var(--neutral-50);
 }
-.conteudo{
-	font-family: 'SEGOE UI', sans-serif;
-	font-size: 1.2em;
-	border-radius: 15px;
-	background-color: #DEDEDE;
-	left: 0;
-	right: 0;
-	padding: 15px;
+
+/* Estilo do conteúdo */
+.conteudo {
+	padding: 2rem;
+	max-width: 1200px;
+	margin: 0 auto;
+	line-height: 1.8;
+	color: var(--neutral-700);
+}
+
+.nome {
+	color: white;
+	font-weight: 300;
+	text-align: center;
+	font-family: 'Segoe UI', sans-serif;
+	margin-top: 2rem;
+	font-size: var(--font-size-3xl);
+	letter-spacing: 1px;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+	color: var(--primary-color);
+	font-weight: 300;
+	text-align: center;
+	font-family: 'Segoe UI', sans-serif;
+	margin-bottom: 1.5rem;
+	font-size: var(--font-size-3xl);
+	position: relative;
+	padding-bottom: 1rem;
+}
+
+.titulo::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 80px;
+	height: 3px;
+	background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+	border-radius: 3px;
+}
+
+/* Estilos para produtos */
+.img_produto {
+	max-width: 100%;
 	height: auto;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease;
 }
-.img_produto{
-	width: 140px;
-	height: 140px;
+
+.img_produto:hover {
+	transform: scale(1.02);
 }
-.tipo{
-	color: #292929;
-	font-size: 25px;
-	text-align: left;
-	font-family: 'SEGOE UI',sans-serif;
+
+.tipo {
+	font-weight: 600;
+	color: var(--primary-color);
+	margin-top: 1rem;
+	font-size: var(--font-size-lg);
+}
+
+/* Estilos para links */
+a {
+	color: var(--primary-color);
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+a:hover {
+	color: var(--primary-dark);
+	text-decoration: underline;
+}
+
+/* Estilos para formulários */
+input, textarea, select {
+	width: 100%;
+	padding: 0.75rem;
+	margin-bottom: 1rem;
+	border: 1px solid var(--neutral-300);
+	border-radius: 4px;
+	font-family: 'Segoe UI', sans-serif;
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+	outline: none;
+	border-color: var(--primary-color);
+	box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.1);
+}
+
+button, .button {
+	background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+	color: white;
+	border: none;
+	padding: 0.75rem 1.5rem;
+	border-radius: 4px;
+	cursor: pointer;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover, .button:hover {
+	background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	transform: translateY(-2px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+	.div-esquerda {
+		width: 14em;
+	}
+	
+	.div-direita {
+		margin-left: 14em;
+	}
+	
+	.menu li {
+		width: 12.5em;
+	}
+	
+	.nome, .titulo {
+		font-size: var(--font-size-2xl);
+	}
+}
+
+@media (max-width: 480px) {
+	.div-esquerda {
+		width: 100%;
+		height: auto;
+		position: relative;
+	}
+	
+	.div-direita {
+		margin-left: 0;
+		position: relative;
+		height: calc(100vh - 200px);
+	}
+	
+	.menu li {
+		width: 90%;
+		margin: 0 auto 0.5em auto;
+	}
+	
+	.nome, .titulo {
+		font-size: var(--font-size-xl);
+	}
 }

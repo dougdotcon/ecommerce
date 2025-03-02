@@ -1,0 +1,77 @@
+{
+  "produtos": [
+    {
+      "id": "kabum_pc-gamer-ryzen-5-5600gt-16gb-3200mhz-radeon-vega-7-integrado-a520m-dx-ssd-480gb-m-2-500w-80-plus-3-fans-rgb-neologic-nli89039",
+      "nome": "PC Gamer Ryzen 5 5600gt, 16gb 3200mhz, (radeon Vega 7 Integrado), A520m Dx, SSD 480GB M.2, 500w 80 Plus, 3 Fans RGB, Neologic - Nli89039",
+      "preco": 2619.0,
+      "preco_original": 3311.64,
+      "descricao": "explore o poder gamer com neologic: transforme sua jornada gamer com o pc gamer neologic! Desfrute de desempenho extraordinário e gráficos surpreendentes.este pc já vem montado e pronto para jogar.garantia de 1 anotodos os computadores neologic possuem garantia de 12 meses e todo o suporte necessário. características do produtoprocessador:- amd ryzen 5 5600gt, 4.6ghz, 6 nucleos, 12 threadsplaca de vídeo:- (radeon vega 7)saída hdmi: simplaca mãe:- am4 a520m ddr4memória: 16gb ddr4 (2x8gb)ssd:- 480gb m.2 nvmegabinete:- full glass whitefonte:- neologic 500w 80 plus bronze- bivolt 110v - 220vsistema operacional: - windows 11 64 bits - 30 diasconteúdo da embalagem: 1 computador neologic pc gamerimagem do fabricante: meramente ilustrativa. A marca das peças pode variar de acordo com o estoque momentâneo em nossa fábrica, garantimos manter sempre o nível de ótima qualidade dos produtos e atender o mínimo estipulado no computador. Nunca um modelo inferior.",
+      "especificacoes": {},
+      "fonte": "Kabum",
+      "url": "https://www.kabum.com.br/produto/691709/pc-gamer-ryzen-5-5600gt-16gb-3200mhz-radeon-vega-7-integrado-a520m-dx-ssd-480gb-m-2-500w-80-plus-3-fans-rgb-neologic-nli89039",
+      "avaliacao": 4.1,
+      "categoria": "PC Gamer"
+    },
+    {
+      "id": "demo_notebook1",
+      "nome": "Notebook Quantum X1 Pro",
+      "preco": 4999.0,
+      "preco_original": 5499.0,
+      "descricao": "Notebook ultrafino com processador de última geração, 16GB RAM e 512GB SSD. Ideal para trabalho e jogos leves.",
+      "imagem": "imagens/notebook.jpg",
+      "especificacoes": {
+        "Processador": "Intel Core i7 11ª Geração",
+        "Memória RAM": "16GB DDR4",
+        "Armazenamento": "512GB SSD NVMe",
+        "Tela": "15.6\" Full HD IPS",
+        "Placa de Vídeo": "NVIDIA GeForce GTX 1650 4GB",
+        "Sistema Operacional": "Windows 11"
+      },
+      "fonte": "ASIMOV TECH",
+      "url": "#",
+      "avaliacao": 4.7,
+      "categoria": "Notebooks"
+    },
+    {
+      "id": "demo_smartphone1",
+      "nome": "Smartphone Nexus Pro Max",
+      "preco": 3499.0,
+      "preco_original": 3999.0,
+      "descricao": "Smartphone com câmera de 108MP, tela AMOLED de 6.7\" e bateria de 5000mAh. Desempenho excepcional para todas as tarefas.",
+      "imagem": "imagens/smartphone.jpg",
+      "especificacoes": {
+        "Processador": "Snapdragon 8 Gen 1",
+        "Memória RAM": "12GB",
+        "Armazenamento": "256GB",
+        "Tela": "6.7\" AMOLED 120Hz",
+        "Câmera Principal": "108MP + 12MP + 8MP",
+        "Bateria": "5000mAh",
+        "Sistema Operacional": "Android 12"
+      },
+      "fonte": "ASIMOV TECH",
+      "url": "#",
+      "avaliacao": 4.9,
+      "categoria": "Smartphones"
+    },
+    {
+      "id": "demo_tv1",
+      "nome": "Smart TV Crystal 4K UHD",
+      "preco": 2799.0,
+      "preco_original": 3299.0,
+      "descricao": "Smart TV 55\" com resolução 4K, HDR10+ e sistema operacional inteligente. Imagem cristalina e recursos avançados.",
+      "imagem": "imagens/smarttv.jpg",
+      "especificacoes": {
+        "Tamanho": "55\"",
+        "Resolução": "4K UHD (3840 x 2160)",
+        "Taxa de Atualização": "60Hz",
+        "HDR": "HDR10+",
+        "Sistema Operacional": "Smart TV OS",
+        "Conexões": "HDMI x3, USB x2, Wi-Fi, Bluetooth"
+      },
+      "fonte": "ASIMOV TECH",
+      "url": "#",
+      "avaliacao": 4.5,
+      "categoria": "Smart TVs"
+    }
+  ]
+}

@@ -1,65 +1,301 @@
 <!DOCTYPE html>
+<html lang="pt-BR">
 <head>
 	<title>Produtos</title>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Ant Design CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.10/antd.min.css" />
+	
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	
+	<!-- CSS personalizado -->
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
-	<link rel="stylesheet" type="text/css" href="../css/produtos.css">
+	
+	<style>
+		.produto-card {
+			height: 100%;
+			transition: all 0.3s ease;
+		}
+		
+		.produto-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+		}
+		
+		.produto-imagem {
+			width: 100%;
+			height: 200px;
+			object-fit: cover;
+			border-radius: 8px 8px 0 0;
+		}
+		
+		.produto-preco {
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: var(--primary-color);
+			margin: 16px 0;
+		}
+		
+		.produto-preco-original {
+			text-decoration: line-through;
+			color: var(--neutral-600);
+			font-size: 1rem;
+			margin-left: 8px;
+		}
+		
+		.produto-desconto {
+			background: var(--primary-color);
+			color: white;
+			padding: 4px 8px;
+			border-radius: 12px;
+			font-size: 0.8rem;
+			position: absolute;
+			top: 16px;
+			right: 16px;
+		}
+		
+		.produto-avaliacao {
+			color: #faad14;
+			margin-right: 8px;
+		}
+		
+		.filtros {
+			background: white;
+			padding: 24px;
+			border-radius: 8px;
+			margin-bottom: 24px;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+		}
+		
+		.ant-select {
+			width: 100%;
+		}
+		
+		.ant-input-search {
+			margin-bottom: 16px;
+		}
+		
+		.sem-produtos {
+			text-align: center;
+			padding: 48px;
+			background: white;
+			border-radius: 8px;
+			margin-top: 24px;
+		}
+		
+		.loading-container {
+			text-align: center;
+			padding: 48px;
+		}
+		
+		.especificacoes-lista {
+			list-style: none;
+			padding: 0;
+			margin: 16px 0;
+		}
+		
+		.especificacoes-lista li {
+			margin-bottom: 8px;
+			display: flex;
+			align-items: flex-start;
+		}
+		
+		.especificacoes-lista i {
+			color: var(--primary-color);
+			margin-right: 8px;
+			margin-top: 4px;
+		}
+	</style>
 </head>
 <body>
-<h1 class="titulo">Produtos</h1>
-<hr>
-<div class="conteudo">
-<h1 class="tipo">Mouses</h1>
-<div class="prod">
-	<div class="nome">Mouse Razer Abyssus 2014 - PC</div>
-	<div class="imagem"><img src= "../imagens/produtos/mouses/razer.jpg"/></div>
-	<div class="preco">
-		R$ 95,91
+	<div class="ant-layout-content">
+		<div class="conteudo fade-in">
+			<div class="ant-page-header">
+				<div class="ant-page-header-heading">
+					<div class="ant-page-header-heading-left">
+						<span class="ant-page-header-heading-title">Nossos Produtos</span>
+						<span class="ant-page-header-heading-sub-title">Tecnologia de ponta com os melhores preços</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="filtros">
+				<div class="ant-row" style="margin-bottom: 16px;">
+					<div class="ant-col ant-col-xs-24 ant-col-md-8" style="padding: 0 8px;">
+						<input type="text" placeholder="Buscar produtos..." class="ant-input" id="busca" />
+					</div>
+					<div class="ant-col ant-col-xs-24 ant-col-md-8" style="padding: 0 8px;">
+						<select class="ant-select" id="categoria">
+							<option value="">Todas as Categorias</option>
+						</select>
+					</div>
+					<div class="ant-col ant-col-xs-24 ant-col-md-8" style="padding: 0 8px;">
+						<select class="ant-select" id="ordenacao">
+							<option value="preco-asc">Menor Preço</option>
+							<option value="preco-desc">Maior Preço</option>
+							<option value="avaliacao">Melhor Avaliação</option>
+							<option value="nome">Nome A-Z</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			<div id="loading" class="loading-container">
+				<div class="ant-spin ant-spin-spinning">
+					<span class="ant-spin-dot">
+						<i></i><i></i><i></i><i></i>
+					</span>
+				</div>
+				<div style="margin-top: 16px;">Carregando produtos...</div>
+			</div>
+			
+			<div id="produtos-container" class="ant-row" style="display: none;"></div>
+			
+			<div id="sem-produtos" class="sem-produtos" style="display: none;">
+				<i class="fas fa-search" style="font-size: 48px; color: var(--neutral-400); margin-bottom: 16px;"></i>
+				<h3>Nenhum produto encontrado</h3>
+				<p>Tente ajustar seus filtros de busca</p>
+			</div>
+		</div>
 	</div>
-	<button class="comprar">Comprar</button>
-</div>
-<div class="prod">
-	<div class="nome">Mouse sem fio Preto e Branco</div>
-	<div class="imagem"><img src= "../imagens/produtos/mouses/wifi.jpg"/></div>
-	<div class="preco">
-		R$ 26,91
-	</div>
-	<button class="comprar">Comprar</button>
-</div>
-<div class="prod">
-	<div class="nome">Mouse Gamer Óptico Black</div>
-	<div class="imagem"><img src= "../imagens/produtos/mouses/gamer.jpg"/></div>
-	<div class="preco">
-		R$ 36,46
-	</div>
-	<button class="comprar">Comprar</button>
-</div>
-<br>
-<h1 class="tipo">Teclados</h1>
-<div class="prod">
-	<div class="nome">Teclado Razer Tron Legacy</div>
-	<div class="imagem"><img src= "../imagens/produtos/teclados/tron.jpg"/></div>
-	<div class="preco">
-		R$ 98,69
-	</div>
-	<button class="comprar">Comprar</button>
-</div>
-<div class="prod">
-	<div class="nome">Teclado Razer Deathstalker</div>
-	<div class="imagem"><img src= "../imagens/produtos/teclados/deathstalker.jpg"/></div>
-	<div class="preco">
-		R$ 112,45
-	</div>
-	<button class="comprar">Comprar</button>
-</div>
-<div class="prod">
-	<div class="nome">Teclado Multimídia Pisc Simples</div>
-	<div class="imagem"><img src= "../imagens/produtos/teclados/multimidia.jpg"/></div>
-	<div class="preco">
-		R$ 19,99
-	</div>
-	<button class="comprar">Comprar</button>
-</div>
-</div>
+	
+	<script>
+		let produtos = [];
+		let produtosFiltrados = [];
+		
+		// Carregar produtos do db.json
+		async function carregarProdutos() {
+			try {
+				const response = await fetch('../db.json');
+				const data = await response.json();
+				produtos = data.produtos;
+				produtosFiltrados = [...produtos];
+				
+				// Carregar categorias únicas
+				const categorias = [...new Set(produtos.map(p => p.categoria))];
+				const selectCategoria = document.getElementById('categoria');
+				categorias.forEach(categoria => {
+					const option = document.createElement('option');
+					option.value = categoria;
+					option.textContent = categoria;
+					selectCategoria.appendChild(option);
+				});
+				
+				aplicarFiltros();
+				document.getElementById('loading').style.display = 'none';
+				document.getElementById('produtos-container').style.display = 'flex';
+			} catch (error) {
+				console.error('Erro ao carregar produtos:', error);
+				document.getElementById('loading').innerHTML = 'Erro ao carregar produtos. Por favor, tente novamente.';
+			}
+		}
+		
+		// Renderizar produtos
+		function renderizarProdutos() {
+			const container = document.getElementById('produtos-container');
+			container.innerHTML = '';
+			
+			if (produtosFiltrados.length === 0) {
+				document.getElementById('sem-produtos').style.display = 'block';
+				container.style.display = 'none';
+				return;
+			}
+			
+			document.getElementById('sem-produtos').style.display = 'none';
+			container.style.display = 'flex';
+			
+			produtosFiltrados.forEach(produto => {
+				const desconto = produto.preco_original ? Math.round((1 - produto.preco / produto.preco_original) * 100) : 0;
+				const imagemPadrao = '../imagens/produto-padrao.jpg';
+				
+				const especificacoesHtml = produto.especificacoes ? 
+					`<ul class="especificacoes-lista">
+						${Object.entries(produto.especificacoes).slice(0, 3).map(([chave, valor]) => 
+							`<li><i class="fas fa-check"></i> ${chave}: ${valor}</li>`
+						).join('')}
+					</ul>` : '';
+				
+				const card = `
+					<div class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-8 ant-col-lg-6" style="padding: 12px;">
+						<div class="ant-card produto-card">
+							${desconto > 0 ? `<div class="produto-desconto">-${desconto}%</div>` : ''}
+							<img 
+								src="${produto.imagem || imagemPadrao}" 
+								alt="${produto.nome}"
+								class="produto-imagem"
+								onerror="this.src='${imagemPadrao}'"
+							/>
+							<div class="ant-card-body">
+								<h3 style="margin-bottom: 8px;">${produto.nome}</h3>
+								<div style="margin-bottom: 8px;">
+									<span class="produto-avaliacao">
+										${'★'.repeat(Math.round(produto.avaliacao))}${'☆'.repeat(5-Math.round(produto.avaliacao))}
+									</span>
+									<span>(${produto.avaliacao})</span>
+								</div>
+								${especificacoesHtml}
+								<div class="produto-preco">
+									R$ ${produto.preco.toFixed(2)}
+									${produto.preco_original ? 
+										`<span class="produto-preco-original">R$ ${produto.preco_original.toFixed(2)}</span>` : 
+										''}
+								</div>
+								<a href="${produto.url}" target="_blank" class="ant-btn ant-btn-primary" style="width: 100%;">
+									<i class="fas fa-shopping-cart" style="margin-right: 8px;"></i>
+									Ver Detalhes
+								</a>
+							</div>
+						</div>
+					</div>
+				`;
+				
+				container.innerHTML += card;
+			});
+		}
+		
+		// Aplicar filtros
+		function aplicarFiltros() {
+			const busca = document.getElementById('busca').value.toLowerCase();
+			const categoria = document.getElementById('categoria').value;
+			const ordenacao = document.getElementById('ordenacao').value;
+			
+			produtosFiltrados = produtos.filter(produto => {
+				const matchBusca = produto.nome.toLowerCase().includes(busca) || 
+								 produto.descricao.toLowerCase().includes(busca);
+				const matchCategoria = !categoria || produto.categoria === categoria;
+				
+				return matchBusca && matchCategoria;
+			});
+			
+			// Ordenação
+			produtosFiltrados.sort((a, b) => {
+				switch(ordenacao) {
+					case 'preco-asc':
+						return a.preco - b.preco;
+					case 'preco-desc':
+						return b.preco - a.preco;
+					case 'avaliacao':
+						return b.avaliacao - a.avaliacao;
+					case 'nome':
+						return a.nome.localeCompare(b.nome);
+					default:
+						return 0;
+				}
+			});
+			
+			renderizarProdutos();
+		}
+		
+		// Event Listeners
+		document.getElementById('busca').addEventListener('input', aplicarFiltros);
+		document.getElementById('categoria').addEventListener('change', aplicarFiltros);
+		document.getElementById('ordenacao').addEventListener('change', aplicarFiltros);
+		
+		// Inicializar
+		carregarProdutos();
+	</script>
 </body>
 </html>

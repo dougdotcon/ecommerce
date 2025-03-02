@@ -1,20 +1,206 @@
 <!DOCTYPE html>
+<html lang="pt-BR">
 <head>
 	<title>Página Inicial</title>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Ant Design CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.10/antd.min.css" />
+	
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	
+	<!-- CSS personalizado -->
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
-
+	
+	<style>
+		.ant-card {
+			border-radius: 8px;
+			overflow: hidden;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+			transition: all 0.3s ease;
+		}
+		
+		.ant-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+		}
+		
+		.ant-card-head {
+			border-bottom: none;
+			padding: 16px 24px 0;
+		}
+		
+		.ant-card-head-title {
+			font-weight: 600;
+			font-size: 18px;
+		}
+		
+		.ant-card-body {
+			padding: 16px 24px 24px;
+		}
+		
+		.feature-icon {
+			font-size: 2rem;
+			margin-bottom: 1rem;
+			display: block;
+		}
+		
+		.ant-btn {
+			border-radius: 4px;
+			font-weight: 500;
+			height: auto;
+			padding: 8px 16px;
+			box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05);
+		}
+		
+		.ant-btn-primary {
+			background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+			border-color: var(--primary-color);
+		}
+		
+		.ant-btn-primary:hover {
+			background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+			border-color: var(--primary-dark);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+		
+		.hero-banner {
+			position: relative;
+			height: 300px;
+			overflow: hidden;
+			margin-bottom: 2rem;
+			border-radius: 8px;
+			box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+		}
+		
+		.hero-banner img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+		
+		.hero-content {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			padding: 2rem;
+		}
+		
+		.hero-title {
+			color: white;
+			font-size: 2.5rem;
+			margin-bottom: 1rem;
+			text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+		}
+		
+		.hero-subtitle {
+			color: white;
+			font-size: 1.2rem;
+			max-width: 600px;
+			text-align: center;
+			margin-bottom: 1.5rem;
+			text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+		}
+		
+		.cta-section {
+			background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+			padding: 2rem;
+			border-radius: 8px;
+			margin-top: 2rem;
+			color: white;
+			text-align: center;
+		}
+		
+		.cta-title {
+			margin-bottom: 1rem;
+			font-size: 1.5rem;
+			color: white;
+		}
+		
+		.cta-description {
+			margin-bottom: 1.5rem;
+		}
+		
+		.ant-row {
+			margin-bottom: 24px;
+		}
+	</style>
 </head>
 <body>
-<h1 class="titulo">ASIMOV</h1>
-<hr>
-<div class="conteudo">
-	Seja bem vindo à nossa loja virtual.
-	<br>
-	<br>
-	O que você precisa?<br>
-	<a style="color:blue; text-decoration: none;" href="produtos.html">> Produtos</a><br>
-	<a style="color:blue; text-decoration: none;" href="servicos.html">> Serviços</a>
-</div>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<!-- React e ReactDOM (necessários para Ant Design) -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+	
+	<!-- Ant Design JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.10/antd.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
+	
+	<div class="ant-layout-content">
+		<div class="hero-banner">
+			<img src="../assets/img/banner.jpg" alt="Banner ASIMOV TECH">
+			<div class="hero-content">
+				<h1 class="hero-title">Bem-vindo à ASIMOV TECH</h1>
+				<p class="hero-subtitle">Soluções tecnológicas para transformar o seu negócio</p>
+			</div>
+		</div>
+
+		<div class="conteudo fade-in">
+			<h2 class="ant-typography" style="text-align: center; color: var(--primary-color); margin-bottom: 24px; font-weight: 500;">Nossa Empresa</h2>
+			
+			<div class="ant-typography" style="margin-bottom: 24px;">
+				Seja bem-vindo à nossa loja virtual. A ASIMOV TECH é especializada em fornecer soluções tecnológicas de alta qualidade para empresas e indivíduos que buscam inovação e eficiência.
+			</div>
+			
+			<div class="ant-row" style="margin: 32px 0;">
+				<div class="ant-col ant-col-xs-24 ant-col-md-12" style="padding: 0 12px; margin-bottom: 24px;">
+					<div class="ant-card">
+						<div class="ant-card-body">
+							<i class="fas fa-rocket feature-icon" style="color: var(--primary-color);"></i>
+							<h3 class="ant-typography" style="margin-bottom: 12px; font-weight: 500;">Produtos Inovadores</h3>
+							<p class="ant-typography">Oferecemos uma ampla gama de produtos tecnológicos para atender às suas necessidades.</p>
+							<a href="produtos.html" class="ant-btn ant-btn-link" style="padding-left: 0; color: var(--primary-color);">
+								Conheça nossos produtos <i class="fas fa-arrow-right" style="font-size: 0.8rem; margin-left: 5px;"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				
+				<div class="ant-col ant-col-xs-24 ant-col-md-12" style="padding: 0 12px; margin-bottom: 24px;">
+					<div class="ant-card">
+						<div class="ant-card-body">
+							<i class="fas fa-cogs feature-icon" style="color: var(--secondary-color);"></i>
+							<h3 class="ant-typography" style="margin-bottom: 12px; font-weight: 500;">Serviços Especializados</h3>
+							<p class="ant-typography">Nossa equipe de especialistas está pronta para oferecer serviços de alta qualidade.</p>
+							<a href="servicos.html" class="ant-btn ant-btn-link" style="padding-left: 0; color: var(--secondary-color);">
+								Conheça nossos serviços <i class="fas fa-arrow-right" style="font-size: 0.8rem; margin-left: 5px;"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="cta-section">
+				<h3 class="cta-title">Precisa de ajuda?</h3>
+				<p class="cta-description">Entre em contato conosco e descubra como podemos ajudar a transformar seu negócio.</p>
+				<a href="faleconosco.html" class="ant-btn ant-btn-primary" style="background: white; color: var(--primary-color); border-color: white;">
+					Fale Conosco
+				</a>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

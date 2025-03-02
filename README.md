@@ -1,122 +1,154 @@
-# ASIMOV - Site Institucional
+# Sistema de Scraping e Exibição de Produtos
 
-## Visão Geral
-
-**ASIMOV** é um site institucional desenvolvido para apresentar informações sobre a organização, seus produtos, serviços e facilitar o contato com clientes. O projeto utiliza uma estrutura básica de HTML, CSS e JavaScript para criar uma navegação interativa e intuitiva.
+Este projeto consiste em um sistema para extrair (scraping) informações de produtos de sites de e-commerce como Kabum e Pichau, armazenar esses dados em um arquivo JSON e exibi-los em uma interface web moderna usando o padrão Ant Design.
 
 ## Funcionalidades
 
-- **Navegação por Menu:**
-  - **Página Inicial:** Introdução à organização e visão geral.
-  - **Produtos:** Detalhes sobre os produtos oferecidos.
-  - **Serviços:** Descrição dos serviços disponibilizados.
-  - **Fale Conosco:** Formulário para contato com a equipe.
+- Scraping de produtos da Kabum e Pichau
+- Armazenamento de dados em formato JSON
+- Download e armazenamento de imagens dos produtos
+- Interface web responsiva para exibição dos produtos
+- Página de detalhes para cada produto
+- Sistema de filtros por categoria, preço e fonte
+- Busca por texto nos produtos
+- Design moderno com Ant Design
+- Animações e transições suaves
+- Layout responsivo para todos os dispositivos
 
-- **Integração com Iframe:**
-  - As páginas são carregadas dinamicamente dentro de um iframe para manter a navegação fluida.
+## Evolução do Design
 
-- **Efeitos Interativos:**
-  - Destaque do menu ativo utilizando **jQuery**.
+O projeto passou por uma significativa evolução visual, adotando o framework Ant Design para criar uma interface mais moderna e profissional.
 
-## Tecnologias Utilizadas
+### Comparação das Versões
 
-- **HTML5:** Estrutura da aplicação.
-- **CSS3:** Estilização personalizada.
-- **JavaScript:** Funcionalidade do menu.
-- **jQuery:** Manipulação de DOM e interatividade.
+#### Página Inicial
+- **Versão Antiga**: Design básico com layout simples
+- **Nova Versão**: Interface moderna com Ant Design, animações suaves e melhor organização do conteúdo
+- *Veja as imagens em: `versaoantiga/inicio.png` e `screenshots/inicio.png`*
 
-## Estrutura do Projeto
+#### Página de Produtos
+- **Versão Antiga**: Lista simples de produtos
+- **Nova Versão**: 
+  - Cards modernos com efeitos de hover
+  - Sistema de filtros avançado
+  - Exibição de especificações técnicas
+  - Indicadores de desconto
+  - Sistema de avaliação com estrelas
+  - Ordenação por preço, avaliação e nome
+- *Veja as imagens em: `versaoantiga/produtos.png` e `screenshots/produtos.png`*
 
-```
-ASIMOV/
-├── index.html            # Página principal
-├── css/
-│   └── style.css         # Estilos CSS
-├── js/
-│   └── jquery.min.js     # Biblioteca jQuery
-├── paginas/
-│   ├── inicio.html       # Página Inicial
-│   ├── produtos.html     # Página de Produtos
-│   ├── servicos.html     # Página de Serviços
-│   └── faleconosco.html  # Página de Contato
-├── README.md             # Documentação do projeto
-```
+#### Página de Serviços
+- **Versão Antiga**: Layout básico com texto simples
+- **Nova Versão**: 
+  - Cards interativos para cada serviço
+  - Seção de benefícios
+  - FAQ expansível
+  - Chamadas para ação destacadas
+  - Ícones e elementos visuais modernos
+- *Veja as imagens em: `versaoantiga/servicos.png` e `screenshots/servicos.png`*
+
+#### Página de Contato
+- **Versão Antiga**: Formulário simples
+- **Nova Versão**: 
+  - Design moderno com gradientes
+  - Validação de campos em tempo real
+  - Mapa interativo
+  - Ícones informativos
+  - Melhor organização das informações de contato
+- *Veja as imagens em: `versaoantiga/contato.png` e `screenshots/contato.png`*
+
+## Requisitos
+
+- Python 3.6+
+- Bibliotecas Python (listadas em `requirements.txt`)
+- Navegador web moderno
 
 ## Instalação
 
-1. **Clone o Repositório**
+1. Clone este repositório:
+```
+git clone https://github.com/seu-usuario/ecommerce.git
+cd ecommerce
+```
 
-   ```bash
-   git clone https://github.com/dougdotcon/ASIMOV.git
-   ```
+2. Instale as dependências:
+```
+pip install -r requirements.txt
+```
 
-2. **Navegue até o Diretório do Projeto**
+3. Execute o script de scraping para coletar produtos:
+```
+python scraper.py
+```
 
-   ```bash
-   cd ASIMOV
-   ```
+4. Gere a imagem de fallback para produtos sem imagem:
+```
+python gerar_imagem_fallback.py
+```
 
-3. **Abra o Arquivo `index.html` no Navegador**
+5. Abra o arquivo `index.html` em seu navegador ou use um servidor web local.
 
-   Você pode abrir o arquivo diretamente no seu navegador preferido clicando duas vezes sobre ele ou utilizando um servidor local.
+## Estrutura do Projeto
 
-   **Usando um Servidor Local com Python:**
+- `scraper.py` - Script para extrair produtos dos sites
+- `gerar_imagem_fallback.py` - Script para criar imagem padrão para produtos sem imagem
+- `db.json` - Banco de dados JSON com informações dos produtos
+- `index.html` - Página inicial do site
+- `paginas/` - Diretório com as páginas do site
+  - `produtos.html` - Página de listagem de produtos
+  - `produto-detalhes.html` - Página de detalhes do produto
+  - `servicos.html` - Página de serviços
+  - `faleconosco.html` - Página de contato
+- `imagens/` - Diretório para armazenar imagens
+  - `produtos/` - Diretório para imagens dos produtos
+- `screenshots/` - Capturas de tela da nova versão
+- `versaoantiga/` - Capturas de tela da versão anterior
 
-   ```bash
-   # Para Python 3.x
-   python -m http.server 8000
+## Melhorias Implementadas
 
-   # Acesse http://localhost:8000 no seu navegador
-   ```
+### Design e UX
+- Adoção do framework Ant Design
+- Animações e transições suaves
+- Layout totalmente responsivo
+- Melhor hierarquia visual
+- Feedback visual para interações
 
-## Uso
+### Funcionalidades
+- Sistema de filtros avançado
+- Busca em tempo real
+- Ordenação flexível
+- Exibição de especificações técnicas
+- Sistema de avaliações
+- Indicadores de desconto
+- FAQ interativo
 
-1. **Navegação**
-   - Utilize o menu à esquerda para acessar diferentes páginas: Página Inicial, Produtos, Serviços e Fale Conosco.
-   - O conteúdo será exibido no painel direito sem recarregar a página.
+### Performance
+- Carregamento otimizado de imagens
+- Código JavaScript modularizado
+- CSS otimizado
+- Animações eficientes
 
-2. **Interatividade**
-   - O item do menu ativo é destacado dinamicamente ao clicar.
+## Como Usar
 
-3. **Personalização**
-   - Edite as páginas HTML em `paginas/` para adicionar ou atualizar informações.
+### Adicionando Novos Sites para Scraping
 
-## Contribuição
+Para adicionar um novo site para scraping, você precisa:
 
-Contribuições são bem-vindas! Para colaborar, siga os passos abaixo:
+1. Criar uma nova função no arquivo `scraper.py` seguindo o padrão das funções existentes
+2. Adicionar as URLs do novo site na função `main()`
+3. Executar o script novamente para coletar os novos produtos
 
-1. **Fork este Repositório**
-2. **Crie uma Branch para sua Contribuição**
+### Personalizando a Exibição
 
-   ```bash
-   git checkout -b feature/nova-feature
-   ```
+Você pode personalizar a aparência do site editando os arquivos HTML e CSS. O projeto utiliza o framework Ant Design para a interface, então você pode consultar a [documentação do Ant Design](https://ant.design/) para mais opções de componentes e estilos.
 
-3. **Commit suas Alterações**
+## Limitações e Considerações
 
-   ```bash
-   git commit -m "Adiciona nova feature"
-   ```
-
-4. **Push para a Branch**
-
-   ```bash
-   git push origin feature/nova-feature
-   ```
-
-5. **Abra um Pull Request**
+- O scraping de sites pode ser afetado por mudanças na estrutura HTML dos sites alvo
+- Respeite os termos de serviço dos sites que você está extraindo dados
+- Adicione pausas entre requisições para não sobrecarregar os servidores alvo
+- Este projeto é apenas para fins educacionais
 
 ## Licença
 
-Este projeto está licenciado sob a [MIT License](LICENSE).
-
-## Contato
-
-- **Autor:** Douglas H. Machado
-- **Email:** [dougdotcon@gmail.om](mailto:dougdotcon@gmail.om)
-- **LinkedIn:** [dougdoton](https://www.linkedin.com/in/dougdoton/)
-- **GitHub:** [dougdotcon](https://github.com/dougdotcon)
-
----
-
-*ASIMOV é um projeto criado para facilitar a apresentação de informações institucionais e o contato com clientes, oferecendo uma interface simples e eficiente.*
+Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para mais detalhes.

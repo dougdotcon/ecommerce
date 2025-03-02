@@ -1,40 +1,464 @@
 <!DOCTYPE html>
+<html lang="pt-BR">
 <head>
 	<title>Fale Conosco</title>
 	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Ant Design CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.10/antd.min.css" />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS personalizado -->
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
+    
+    <style>
+        .ant-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            height: 100%;
+            transition: all 0.3s ease;
+            margin-bottom: 24px;
+        }
+        
+        .ant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        .ant-card-head {
+            border-bottom: none;
+            padding: 16px 24px 0;
+        }
+        
+        .ant-card-head-title {
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .ant-card-body {
+            padding: 16px 24px 24px;
+        }
+        
+        .ant-btn {
+            border-radius: 4px;
+            font-weight: 500;
+            height: auto;
+            padding: 8px 16px;
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        .ant-btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-color: var(--primary-color);
+        }
+        
+        .ant-btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ant-page-header {
+            padding: 16px 0;
+            background-color: transparent;
+        }
+        
+        .ant-page-header-heading-title {
+            font-weight: 600;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+        
+        .ant-page-header-heading-sub-title {
+            font-size: 14px;
+            color: var(--neutral-600);
+        }
+        
+        .ant-divider {
+            margin: 24px 0;
+        }
+        
+        .ant-row {
+            margin: 0 -12px;
+        }
+        
+        .ant-col {
+            padding: 0 12px;
+        }
+        
+        .ant-form-item {
+            margin-bottom: 24px;
+        }
+        
+        .ant-form-item-label {
+            padding-bottom: 8px;
+        }
+        
+        .ant-form-item-label > label {
+            color: var(--neutral-700);
+            font-weight: 500;
+        }
+        
+        .ant-input {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid var(--neutral-300);
+            transition: all 0.3s ease;
+        }
+        
+        .ant-input:hover {
+            border-color: var(--primary-light);
+        }
+        
+        .ant-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(126, 34, 206, 0.2);
+        }
+        
+        .ant-input-textarea {
+            padding: 0;
+        }
+        
+        .ant-select {
+            width: 100%;
+        }
+        
+        .ant-select-selector {
+            padding: 8px 12px !important;
+            height: auto !important;
+            border-radius: 4px !important;
+        }
+        
+        .contato-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .contato-info-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(126, 34, 206, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+        
+        .contato-info-content {
+            flex: 1;
+        }
+        
+        .contato-info-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--neutral-800);
+        }
+        
+        .contato-info-text {
+            color: var(--neutral-600);
+        }
+        
+        .mapa {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(126, 34, 206, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+    </style>
 </head>
 <body>
-<h1 class="titulo">Fale Conosco</h1>
-<hr>
-<div class="conteudo">
-<table style="font-family: 'SEGOE UI', sans-serif; font-size: 20px;">
-
-	<tr> <td> CEP:</td> <td>23585-240</td> </tr>
-	<tr> <td> Endereço:</td> <td>Rua Campestre, 7 de Abril</td> </tr>
-	<tr> <td> Número: </td> <td>259</td> </tr>
-	<tr> <td> Bairro:</td> <td>Paciência</td>  </tr>
-	<tr> <td> Cidade: </td> <td>Rio de Janeiro - RJ</td> </tr>
-	<tr> <td> Telefone: </td> <td>(21) 98230-1476</td> </tr>
-</table></div>
-
-<div class="conteudo">
-<table style="font-family: 'SEGOE UI', sans-serif; font-size: 20px;">
-<form name="formulario" action="http://www18.locaweb.com.br/scripts/FormMail.pl" method="post">
-<input type=hidden name="destino" value="asimova@masimov.esy.es">
-<input type=hidden name="enviado" value="hhttp://www.asimov.esy.es/enviado.htm">
-<p><b>Nome:</b><br>
-<input type=text name="nome" size="25"></p><br>
-<p><b>Email:</b><br>
-<input type=text name="email" size="25"></p><br>
-<p><b>Assunto:</b><br>
-<input type=text name="assunto" size="25"></p><br>
-<p><b>Mensagem:</b><br>
-<textarea name="Mensagem" rows="10" cols="60" wrap="virtual"></textarea></p><br>
-<p><input type="submit" value="Enviar Email"> <input type="reset" value="Limpar Formulário"></p>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- React e ReactDOM (necessários para Ant Design) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    
+    <!-- Ant Design JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.10/antd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
+    
+    <div class="ant-layout-content">
+        <div class="conteudo fade-in">
+            <div class="ant-page-header">
+                <div class="ant-page-header-heading">
+                    <div class="ant-page-header-heading-left">
+                        <span class="ant-page-header-heading-title">Fale Conosco</span>
+                        <span class="ant-page-header-heading-sub-title">Entre em contato com nossa equipe</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ant-typography" style="margin-bottom: 24px;">
+                Estamos à disposição para atender suas dúvidas, sugestões ou solicitações. Preencha o formulário abaixo ou utilize um dos nossos canais de atendimento.
+            </div>
+            
+            <div class="ant-row">
+                <div class="ant-col ant-col-xs-24 ant-col-md-12" style="margin-bottom: 24px;">
+                    <div class="ant-card">
+                        <div class="ant-card-body">
+                            <h3 class="ant-typography" style="margin-bottom: 24px; color: var(--primary-color);">Envie sua mensagem</h3>
+                            
+                            <form class="ant-form ant-form-vertical">
+                                <div class="ant-form-item">
+                                    <div class="ant-form-item-label">
+                                        <label for="nome" class="ant-form-item-required">Nome</label>
+                                    </div>
+                                    <div class="ant-form-item-control">
+                                        <div class="ant-form-item-control-input">
+                                            <div class="ant-form-item-control-input-content">
+                                                <input type="text" id="nome" class="ant-input" placeholder="Seu nome completo" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="ant-form-item">
+                                    <div class="ant-form-item-label">
+                                        <label for="email" class="ant-form-item-required">E-mail</label>
+                                    </div>
+                                    <div class="ant-form-item-control">
+                                        <div class="ant-form-item-control-input">
+                                            <div class="ant-form-item-control-input-content">
+                                                <input type="email" id="email" class="ant-input" placeholder="Seu e-mail" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="ant-form-item">
+                                    <div class="ant-form-item-label">
+                                        <label for="telefone">Telefone</label>
+                                    </div>
+                                    <div class="ant-form-item-control">
+                                        <div class="ant-form-item-control-input">
+                                            <div class="ant-form-item-control-input-content">
+                                                <input type="tel" id="telefone" class="ant-input" placeholder="(00) 00000-0000" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="ant-form-item">
+                                    <div class="ant-form-item-label">
+                                        <label for="assunto" class="ant-form-item-required">Assunto</label>
+                                    </div>
+                                    <div class="ant-form-item-control">
+                                        <div class="ant-form-item-control-input">
+                                            <div class="ant-form-item-control-input-content">
+                                                <select id="assunto" class="ant-select-selector">
+                                                    <option value="">Selecione um assunto</option>
+                                                    <option value="duvida">Dúvidas sobre produtos</option>
+                                                    <option value="orcamento">Solicitar orçamento</option>
+                                                    <option value="suporte">Suporte técnico</option>
+                                                    <option value="outro">Outro assunto</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="ant-form-item">
+                                    <div class="ant-form-item-label">
+                                        <label for="mensagem" class="ant-form-item-required">Mensagem</label>
+                                    </div>
+                                    <div class="ant-form-item-control">
+                                        <div class="ant-form-item-control-input">
+                                            <div class="ant-form-item-control-input-content">
+                                                <textarea id="mensagem" class="ant-input" rows="5" placeholder="Digite sua mensagem"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="ant-form-item">
+                                    <div class="ant-form-item-control">
+                                        <div class="ant-form-item-control-input">
+                                            <div class="ant-form-item-control-input-content">
+                                                <button type="submit" class="ant-btn ant-btn-primary">
+                                                    <i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Enviar Mensagem
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
 </div>
 </form>
-</table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ant-col ant-col-xs-24 ant-col-md-12">
+                    <div class="ant-card">
+                        <div class="ant-card-body">
+                            <h3 class="ant-typography" style="margin-bottom: 24px; color: var(--primary-color);">Informações de Contato</h3>
+                            
+                            <div class="contato-info-item">
+                                <div class="contato-info-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contato-info-content">
+                                    <div class="contato-info-title">Endereço</div>
+                                    <div class="contato-info-text">Av. Tecnologia, 1500 - Centro<br />São Paulo - SP, 01234-567</div>
+                                </div>
+                            </div>
+                            
+                            <div class="contato-info-item">
+                                <div class="contato-info-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="contato-info-content">
+                                    <div class="contato-info-title">Telefone</div>
+                                    <div class="contato-info-text">(11) 3456-7890</div>
+                                </div>
+                            </div>
+                            
+                            <div class="contato-info-item">
+                                <div class="contato-info-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contato-info-content">
+                                    <div class="contato-info-title">E-mail</div>
+                                    <div class="contato-info-text">contato@asimovtech.com.br</div>
+                                </div>
+                            </div>
+                            
+                            <div class="contato-info-item">
+                                <div class="contato-info-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="contato-info-content">
+                                    <div class="contato-info-title">Horário de Atendimento</div>
+                                    <div class="contato-info-text">Segunda a Sexta: 9h às 18h<br />Sábado: 9h às 13h</div>
+                                </div>
+                            </div>
+                            
+                            <div class="ant-divider"></div>
+                            
+                            <h4 class="ant-typography" style="margin-bottom: 16px;">Redes Sociais</h4>
+                            
+                            <div class="social-links">
+                                <a href="#" class="social-link" aria-label="Facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="Twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                            
+                            <div class="mapa">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1975588021244!2d-46.65429548502406!3d-23.564611184682373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1645567990702!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ant-divider"></div>
+            
+            <div class="ant-card" style="margin-top: 24px;">
+                <div class="ant-card-body">
+                    <h3 class="ant-typography" style="margin-bottom: 16px; color: var(--primary-color);">Perguntas Frequentes</h3>
+                    
+                    <div class="ant-collapse">
+                        <div class="ant-collapse-item">
+                            <div class="ant-collapse-header">
+                                <i class="fas fa-plus" style="margin-right: 12px; font-size: 12px;"></i>
+                                <span>Qual o prazo de entrega dos produtos?</span>
+                            </div>
+                            <div class="ant-collapse-content" style="display: none;">
+                                <div class="ant-collapse-content-box">
+                                    <p>O prazo de entrega varia de acordo com a região, mas geralmente é de 3 a 7 dias úteis após a confirmação do pagamento.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ant-collapse-item" style="margin-top: 12px;">
+                            <div class="ant-collapse-header">
+                                <i class="fas fa-plus" style="margin-right: 12px; font-size: 12px;"></i>
+                                <span>Como posso acompanhar meu pedido?</span>
+                            </div>
+                            <div class="ant-collapse-content" style="display: none;">
+                                <div class="ant-collapse-content-box">
+                                    <p>Após a confirmação do pedido, você receberá um código de rastreamento por e-mail que permitirá acompanhar o status da entrega.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ant-collapse-item" style="margin-top: 12px;">
+                            <div class="ant-collapse-header">
+                                <i class="fas fa-plus" style="margin-right: 12px; font-size: 12px;"></i>
+                                <span>Quais são as formas de pagamento aceitas?</span>
+                            </div>
+                            <div class="ant-collapse-content" style="display: none;">
+                                <div class="ant-collapse-content-box">
+                                    <p>Aceitamos cartões de crédito, boleto bancário, transferência bancária e PIX.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
+    
+    <script>
+        // Script para controlar o comportamento do collapse
+        $(document).ready(function() {
+            $('.ant-collapse-header').click(function() {
+                var content = $(this).next('.ant-collapse-content');
+                var icon = $(this).find('i');
+                
+                if (content.is(':visible')) {
+                    content.slideUp();
+                    icon.removeClass('fa-minus').addClass('fa-plus');
+                } else {
+                    content.slideDown();
+                    icon.removeClass('fa-plus').addClass('fa-minus');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

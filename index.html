@@ -1,31 +1,366 @@
 <!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-	<title>ASIMOV</title>
+	<title>ASIMOV TECH</title>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="assets/img/logo.ico" type="image/x-icon">
+	
+	<!-- Ant Design CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.10/antd.min.css" />
+	
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	
+	<!-- CSS personalizado -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	
+	<style>
+		/* Estilos específicos para o Ant Design */
+		.ant-layout {
+			min-height: 100vh;
+		}
+		
+		.ant-layout-sider {
+			background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+		}
+		
+		.logo-container {
+			text-align: center;
+			padding: 1.5rem 0;
+			margin-bottom: 1rem;
+			background-color: rgba(255, 255, 255, 0.1);
+			border-radius: 0 0 20px 20px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		}
+		
+		.logo-container img {
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+			border: 3px solid rgba(255, 255, 255, 0.7);
+			transition: transform 0.3s ease;
+			background-color: white;
+			padding: 5px;
+		}
+		
+		.logo-container img:hover {
+			transform: scale(1.05);
+		}
+		
+		.site-name {
+			color: white;
+			font-weight: 500;
+			text-align: center;
+			font-family: 'Segoe UI', sans-serif;
+			margin-top: 0.8rem;
+			font-size: 1.5rem;
+			letter-spacing: 1px;
+			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		}
+		
+		.site-subtitle {
+			color: rgba(255, 255, 255, 0.8);
+			font-size: 0.85rem;
+			margin-top: 0.2rem;
+			letter-spacing: 0.5px;
+		}
+		
+		.ant-menu {
+			background: transparent;
+			border-right: none;
+			padding: 0.5rem;
+		}
+		
+		.ant-menu-item {
+			margin: 0.7rem 0.5rem !important;
+			border-radius: 10px;
+			height: 48px !important;
+			line-height: 48px !important;
+			color: rgba(255, 255, 255, 0.85) !important;
+			transition: all 0.3s ease;
+			position: relative;
+			overflow: visible;
+			background-color: rgba(255, 255, 255, 0.1) !important;
+		}
+		
+		.ant-menu-item:hover {
+			background-color: rgba(255, 255, 255, 0.2) !important;
+			color: white !important;
+			transform: translateX(5px);
+		}
+		
+		.ant-menu-item-selected {
+			background-color: white !important;
+			color: var(--primary-color) !important;
+			font-weight: 600;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+			transform: translateX(5px);
+		}
+		
+		.ant-menu-item-selected::after {
+			display: none !important;
+		}
+		
+		.ant-menu-item .anticon {
+			font-size: 1.2rem;
+			margin-right: 12px;
+			vertical-align: middle;
+		}
+		
+		.ant-menu-item a {
+			display: flex;
+			align-items: center;
+			padding: 0 1rem;
+			color: inherit !important;
+			text-decoration: none;
+			width: 100%;
+			height: 100%;
+		}
+		
+		.ant-menu-item-selected a {
+			color: var(--primary-color) !important;
+		}
+		
+		/* Indicador visual para item selecionado */
+		.ant-menu-item::before {
+			content: '';
+			position: absolute;
+			left: -0.5rem;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 0;
+			height: 60%;
+			background-color: white;
+			border-radius: 0 4px 4px 0;
+			transition: width 0.3s ease;
+		}
+		
+		.ant-menu-item-selected::before {
+			width: 4px;
+		}
+		
+		.footer {
+			text-align: center;
+			margin-top: 2rem;
+			color: white;
+			font-size: 0.8rem;
+			padding: 1rem;
+			background-color: rgba(0, 0, 0, 0.15);
+			border-radius: 10px;
+			margin: 2rem 0.5rem 1rem;
+		}
+		
+		.social-icons {
+			margin-top: 1rem;
+			display: flex;
+			justify-content: center;
+			gap: 1rem;
+		}
+		
+		.social-icons a {
+			color: white;
+			font-size: 1.2rem;
+			transition: all 0.3s ease;
+			width: 32px;
+			height: 32px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: rgba(255, 255, 255, 0.1);
+			border-radius: 50%;
+		}
+		
+		.social-icons a:hover {
+			color: var(--primary-color);
+			background-color: white;
+			transform: translateY(-3px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
+		
+		.ant-layout-content {
+			padding: 0;
+			height: 100vh;
+			overflow: hidden;
+		}
+		
+		iframe {
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+		
+		/* Botão de colapso para mobile */
+		.ant-layout-sider-trigger {
+			background: var(--primary-color) !important;
+			color: white;
+			height: 40px;
+			line-height: 40px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		
+		/* Responsividade */
+		@media (max-width: 768px) {
+			.ant-layout-sider-collapsed {
+				width: 0 !important;
+				min-width: 0 !important;
+				max-width: 0 !important;
+				flex: 0 0 0 !important;
+			}
+			
+			.ant-layout-sider-trigger {
+				width: 36px !important;
+				transform: translateX(-100%);
+				border-radius: 0 4px 4px 0;
+				box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+			}
+		}
+	</style>
 </head>
 <body>
-	<div class="div-esquerda">
-	<h1 class="nome">ASIMOV</h1>			
-	<div class="menu">
-	<ul>
-		<a target="ctd" href="paginas/inicio.html"><li onclick="mC(this);" id="inicio" class="ativo" >Página Inicial</li></a>
-		<a target="ctd" href="paginas/produtos.html"><li onclick="mC(this);"  id="produtos">Produtos</li></a>
-		<a target="ctd" href="paginas/servicos.html"><li onclick="mC(this);" id="servicos">Serviços</li></a>
-		<a target="ctd" href="paginas/faleconosco.html"><li onclick="mC(this);" id="faleconosco">Fale Conosco</li></a>
-	</ul>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<!-- Ant Design JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.10/antd.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
+	
+	<!-- React e ReactDOM (necessários para Ant Design) -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+	
+	<div id="app">
+		<div class="ant-layout ant-layout-has-sider">
+			<!-- Sidebar -->
+			<div class="ant-layout-sider" style="width: 250px; max-width: 250px; min-width: 250px; flex: 0 0 250px;">
+				<div class="logo-container">
+					<img src="assets/img/logo.jpg" alt="ASIMOV TECH Logo">
+					<h1 class="site-name">ASIMOV TECH</h1>
+					<div class="site-subtitle">Soluções Tecnológicas</div>
+				</div>
+				
+				<!-- Menu -->
+				<ul class="ant-menu ant-menu-root ant-menu-inline" role="menu">
+					<li class="ant-menu-item ant-menu-item-selected" id="inicio" role="menuitem" data-tooltip="Página inicial">
+						<a target="ctd" href="paginas/inicio.html" onclick="mC(this.parentNode);">
+							<span role="img" aria-label="home" class="anticon anticon-home">
+								<i class="fas fa-home"></i>
+							</span>
+							<span>Página Inicial</span>
+						</a>
+					</li>
+					<li class="ant-menu-item" id="produtos" role="menuitem" data-tooltip="Nossos produtos">
+						<a target="ctd" href="paginas/produtos.html" onclick="mC(this.parentNode);">
+							<span role="img" aria-label="shopping" class="anticon anticon-shopping">
+								<i class="fas fa-shopping-cart"></i>
+							</span>
+							<span>Produtos</span>
+						</a>
+					</li>
+					<li class="ant-menu-item" id="servicos" role="menuitem" data-tooltip="Nossos serviços">
+						<a target="ctd" href="paginas/servicos.html" onclick="mC(this.parentNode);">
+							<span role="img" aria-label="setting" class="anticon anticon-setting">
+								<i class="fas fa-cogs"></i>
+							</span>
+							<span>Serviços</span>
+						</a>
+					</li>
+					<li class="ant-menu-item" id="faleconosco" role="menuitem" data-tooltip="Entre em contato">
+						<a target="ctd" href="paginas/faleconosco.html" onclick="mC(this.parentNode);">
+							<span role="img" aria-label="mail" class="anticon anticon-mail">
+								<i class="fas fa-envelope"></i>
+							</span>
+							<span>Fale Conosco</span>
+						</a>
+					</li>
+				</ul>
+				
+				<!-- Footer -->
+				<div class="footer">
+					<p>&copy; 2023 ASIMOV TECH</p>
+					<div class="social-icons">
+						<a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+						<a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+						<a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+						<a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+					</div>
+				</div>
+				
+				<!-- Botão de colapso para mobile -->
+				<div class="ant-layout-sider-trigger" style="width: 250px; display: none;">
+					<span role="img" aria-label="left" class="anticon anticon-left">
+						<i class="fas fa-bars"></i>
+					</span>
+				</div>
+			</div>
+			
+			<!-- Conteúdo principal -->
+			<div class="ant-layout">
+				<div class="ant-layout-content">
+					<iframe name="ctd" src="paginas/inicio.html" class="fade-in"></iframe>
+				</div>
+			</div>
+		</div>
 	</div>
-	</div>
-	<div class="div-direita">
-		<iframe	name="ctd" src="paginas/inicio.html"></iframe>
-	</div>
-	</div>	
+	
+	<script>
+		function mC(elemento) {
+			// Remove a classe selecionada de todos os itens
+			document.querySelectorAll('.ant-menu-item').forEach(item => {
+				item.classList.remove('ant-menu-item-selected');
+			});
+			
+			// Adiciona a classe selecionada ao item clicado
+			elemento.classList.add('ant-menu-item-selected');
+		}
+		
+		// Responsividade para mobile
+		document.addEventListener('DOMContentLoaded', function() {
+			const siderTrigger = document.querySelector('.ant-layout-sider-trigger');
+			const sider = document.querySelector('.ant-layout-sider');
+			
+			// Mostrar o botão de colapso em telas pequenas
+			if (window.innerWidth <= 768) {
+				siderTrigger.style.display = 'flex';
+			}
+			
+			// Adicionar evento de redimensionamento
+			window.addEventListener('resize', function() {
+				if (window.innerWidth <= 768) {
+					siderTrigger.style.display = 'flex';
+				} else {
+					siderTrigger.style.display = 'none';
+					sider.style.width = '250px';
+					sider.style.minWidth = '250px';
+					sider.style.maxWidth = '250px';
+					sider.style.flex = '0 0 250px';
+				}
+			});
+			
+			// Alternar o colapso do sidebar
+			let collapsed = false;
+			siderTrigger.addEventListener('click', function() {
+				collapsed = !collapsed;
+				if (collapsed) {
+					sider.style.width = '0';
+					sider.style.minWidth = '0';
+					sider.style.maxWidth = '0';
+					sider.style.flex = '0 0 0';
+					siderTrigger.innerHTML = '<span role="img" aria-label="right" class="anticon anticon-right"><i class="fas fa-bars"></i></span>';
+				} else {
+					sider.style.width = '250px';
+					sider.style.minWidth = '250px';
+					sider.style.maxWidth = '250px';
+					sider.style.flex = '0 0 250px';
+					siderTrigger.innerHTML = '<span role="img" aria-label="left" class="anticon anticon-left"><i class="fas fa-bars"></i></span>';
+				}
+			});
+		});
+	</script>
 </body>
 </html>
-<script src="js/jquery.min.js"></script>
-<script>
-	function mC(elemento){
-		$(".ativo").removeClass("ativo");
-		$(elemento).toggleClass("ativo");
-	}
-</script>
